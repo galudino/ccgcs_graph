@@ -1,0 +1,77 @@
+\label{index_md_README}%
+\Hypertarget{index_md_README}%
+ \doxysubsection*{A graph A\+DT, written in C++}
+
+The goal of this repository is to further my understanding of graphs,~\newline
+ and to practice C++ in general (in particular, using templates and smart pointers)
+
+I want to have the following abstractions\+:~\newline
+~\newline
+ {\ttfamily position}
+\begin{DoxyItemize}
+\item stores euclidean coordinates x, y, z
+\end{DoxyItemize}
+
+{\ttfamily edge$<$edge\+\_\+type$>$}
+\begin{DoxyItemize}
+\item stores a weight/cost (a floating point value)
+\item stores an {\ttfamily edge\+\_\+type}, a type parameter defined by the user
+\item stores a {\ttfamily parent\+\_\+id} (ID of node u) and {\ttfamily child\+\_\+id} (ID of node v)
+\end{DoxyItemize}
+
+{\ttfamily node$<$node\+\_\+type, edge\+\_\+type$>$}
+\begin{DoxyItemize}
+\item stores a {\ttfamily position}
+\item stores a {\ttfamily node\+\_\+type}, a type parameter defined by the user
+\item stores a container of {\ttfamily edge$<$edge\+\_\+type$>$}
+\item stores an id
+\end{DoxyItemize}
+
+{\ttfamily graph$<$node\+\_\+type, edge\+\_\+type$>$}
+\begin{DoxyItemize}
+\item will store nodes as a dictionary of {\ttfamily \mbox{[}id \+: node\mbox{]}}
+\item subject to change, as I learn more
+\end{DoxyItemize}
+
+{\bfseries{What I want the most for this graph\+: parameterized types}}
+\begin{DoxyItemize}
+\item {\ttfamily edge} and {\ttfamily node} can store their own data types
+\item {\ttfamily graph}, by extension, has an {\ttfamily edge\+\_\+type} and {\ttfamily node\+\_\+type}
+\item Depth-\/first search
+\item Dijkstra\textquotesingle{}s Shortest Path Algorithm
+\end{DoxyItemize}
+
+I do not plan to use any outside libraries --~\newline
+ I will only use the C++ Standard Library and the C++ Standard Template Library.
+
+\doxysubsection*{How to use}
+
+At this time, this guide/source code is being written/tested on mac\+OS 10.\+15.\+5.~\newline
+
+
+I cannot guarantee compatibility with other platforms,~\newline
+ but since I am only using the C++ Standard Library and the C++ S\+TL,~\newline
+ I do not anticipate any issues with other platforms, like Windows or the various flavors of Linux.~\newline
+
+
+Clone the {\bfseries{gcs\+\_\+graph}} repository onto your machine.~\newline
+ Navigate to the local copy of {\bfseries{gcs\+\_\+graph}} on your system,~\newline
+ then type {\ttfamily make}. (a {\bfseries{Makefile}} is provided with the repository)
+
+You have now built the sources for {\bfseries{gcs\+\_\+graph}}.~\newline
+
+
+Type {\ttfamily ./main} to run the code in {\ttfamily client/main.\+cpp},~\newline
+ or type {\ttfamily ./test} to run the code in {\ttfamily tests/test.\+cpp}.
+
+\doxysubsection*{Creating a .tar.\+gz archive (tarball)}
+
+You can make an archive (tarball) of your local copy of this repository~\newline
+ by typing {\ttfamily ./maketarball your\+\_\+chosen\+\_\+name.\+tar.\+gz},~\newline
+ where \textquotesingle{}your\+\_\+chosen\+\_\+name\textquotesingle{} is...a name of your choice.~\newline
+
+
+Don\textquotesingle{}t forget the {\ttfamily .tar.\+gz} extension.
+
+Example\+:~\newline
+ {\ttfamily ./maketarball gcs\+\_\+graph.\+tar.\+gz} 

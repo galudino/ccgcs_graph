@@ -1,0 +1,262 @@
+\hypertarget{structgcs_1_1position2_d}{}\doxysection{gcs\+::position2D Struct Reference}
+\label{structgcs_1_1position2_d}\index{gcs::position2D@{gcs::position2D}}
+
+
+An abstraction for a two-\/dimensional Cartesian coordinate.  
+
+
+
+
+{\ttfamily \#include $<$position.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structgcs_1_1position2_d_a558278cc8ff77fdee6e134f3e7a76208}{position2D}} (double \mbox{\hyperlink{structgcs_1_1position2_d_acc773464530df4fe5299770a5b0aebb9}{x}}, double \mbox{\hyperlink{structgcs_1_1position2_d_a45925fdd6d48a7a97bc061abb49837dd}{y}})
+\item 
+\mbox{\hyperlink{structgcs_1_1position2_d_a41eb2035ef542e0b3a6ee208d0c0a362}{position2D}} (const \mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} \&p)
+\item 
+double \mbox{\hyperlink{structgcs_1_1position2_d_acc773464530df4fe5299770a5b0aebb9}{x}} () const
+\item 
+double \mbox{\hyperlink{structgcs_1_1position2_d_a45925fdd6d48a7a97bc061abb49837dd}{y}} () const
+\item 
+std\+::array$<$ double, 2 $>$ \mbox{\hyperlink{structgcs_1_1position2_d_a31d3a5c27b11899e419d8c1274f2ed24}{get}} () const
+\item 
+void \mbox{\hyperlink{structgcs_1_1position2_d_a34e62d74513546a1d731d5aacad863b8}{set\+\_\+x}} (double \mbox{\hyperlink{structgcs_1_1position2_d_acc773464530df4fe5299770a5b0aebb9}{x}})
+\item 
+void \mbox{\hyperlink{structgcs_1_1position2_d_a7f547589b1c53fc2e144aa47f1d59f31}{set\+\_\+y}} (double \mbox{\hyperlink{structgcs_1_1position2_d_a45925fdd6d48a7a97bc061abb49837dd}{y}})
+\item 
+void \mbox{\hyperlink{structgcs_1_1position2_d_a0648780094c997e7c20357799036f8af}{set}} (double \mbox{\hyperlink{structgcs_1_1position2_d_acc773464530df4fe5299770a5b0aebb9}{x}}, double \mbox{\hyperlink{structgcs_1_1position2_d_a45925fdd6d48a7a97bc061abb49837dd}{y}})
+\item 
+void \mbox{\hyperlink{structgcs_1_1position2_d_a60085557ea471b3cd522be5ec94a29f4}{set}} (std\+::array$<$ double, 2 $>$ arr)
+\item 
+double \mbox{\hyperlink{structgcs_1_1position2_d_a771b86fa5d659500df8fd289faf067c3}{distance}} (\mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} \&p) const
+\item 
+\mbox{\Hypertarget{structgcs_1_1position2_d_aa8f9df0f6cd5c4c9758683bb404751b3}\label{structgcs_1_1position2_d_aa8f9df0f6cd5c4c9758683bb404751b3}} 
+void {\bfseries reset} ()
+\item 
+double \& \mbox{\hyperlink{structgcs_1_1position2_d_aa33fd46c72debcdc9e09fbd9e9660f20}{operator\mbox{[}$\,$\mbox{]}}} (int index) const
+\item 
+bool \mbox{\hyperlink{structgcs_1_1position2_d_add31d4aefb127f9a002f9d8dbff62777}{operator==}} (const \mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} \&p) const
+\item 
+\mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} \mbox{\hyperlink{structgcs_1_1position2_d_acacf315712029e894ad6aa880991b90c}{operator+}} (const \mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} \&p) const
+\item 
+\mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} \mbox{\hyperlink{structgcs_1_1position2_d_ab4e7c1bdbf58d167728d7e727c7f1d4b}{operator-\/}} (const \mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} \&p) const
+\item 
+\mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} \mbox{\hyperlink{structgcs_1_1position2_d_a8f4f16c78ab21e5abdf435f3a7c960cb}{operator$\ast$}} (const \mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} \&p) const
+\item 
+\mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} \mbox{\hyperlink{structgcs_1_1position2_d_abc81ed20d4b5396ecdba30c1e9eb7751}{operator/}} (const \mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} \&p) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structgcs_1_1position2_d_a6a349b6c46ad5462f198061a07c1d7bd}\label{structgcs_1_1position2_d_a6a349b6c46ad5462f198061a07c1d7bd}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} \&p)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An abstraction for a two-\/dimensional Cartesian coordinate. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structgcs_1_1position2_d_a558278cc8ff77fdee6e134f3e7a76208}\label{structgcs_1_1position2_d_a558278cc8ff77fdee6e134f3e7a76208}} 
+\index{gcs::position2D@{gcs::position2D}!position2D@{position2D}}
+\index{position2D@{position2D}!gcs::position2D@{gcs::position2D}}
+\doxysubsubsection{\texorpdfstring{position2D()}{position2D()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily position2\+D\+::position2D (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em x} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em y} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structgcs_1_1position2_d_a41eb2035ef542e0b3a6ee208d0c0a362}\label{structgcs_1_1position2_d_a41eb2035ef542e0b3a6ee208d0c0a362}} 
+\index{gcs::position2D@{gcs::position2D}!position2D@{position2D}}
+\index{position2D@{position2D}!gcs::position2D@{gcs::position2D}}
+\doxysubsubsection{\texorpdfstring{position2D()}{position2D()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily position2\+D\+::position2D (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} \&}]{p }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em p} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structgcs_1_1position2_d_a771b86fa5d659500df8fd289faf067c3}\label{structgcs_1_1position2_d_a771b86fa5d659500df8fd289faf067c3}} 
+\index{gcs::position2D@{gcs::position2D}!distance@{distance}}
+\index{distance@{distance}!gcs::position2D@{gcs::position2D}}
+\doxysubsubsection{\texorpdfstring{distance()}{distance()}}
+{\footnotesize\ttfamily double position2\+D\+::distance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} \&}]{p }\end{DoxyParamCaption}) const}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em p} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{structgcs_1_1position2_d_a31d3a5c27b11899e419d8c1274f2ed24}\label{structgcs_1_1position2_d_a31d3a5c27b11899e419d8c1274f2ed24}} 
+\index{gcs::position2D@{gcs::position2D}!get@{get}}
+\index{get@{get}!gcs::position2D@{gcs::position2D}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily std\+::array$<$ double, 2 $>$ position2\+D\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{structgcs_1_1position2_d_a8f4f16c78ab21e5abdf435f3a7c960cb}\label{structgcs_1_1position2_d_a8f4f16c78ab21e5abdf435f3a7c960cb}} 
+\index{gcs::position2D@{gcs::position2D}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!gcs::position2D@{gcs::position2D}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} position2\+D\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} \&}]{p }\end{DoxyParamCaption}) const}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em p} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{structgcs_1_1position2_d_acacf315712029e894ad6aa880991b90c}\label{structgcs_1_1position2_d_acacf315712029e894ad6aa880991b90c}} 
+\index{gcs::position2D@{gcs::position2D}!operator+@{operator+}}
+\index{operator+@{operator+}!gcs::position2D@{gcs::position2D}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} position2\+D\+::operator+ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} \&}]{p }\end{DoxyParamCaption}) const}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em p} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{structgcs_1_1position2_d_ab4e7c1bdbf58d167728d7e727c7f1d4b}\label{structgcs_1_1position2_d_ab4e7c1bdbf58d167728d7e727c7f1d4b}} 
+\index{gcs::position2D@{gcs::position2D}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!gcs::position2D@{gcs::position2D}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} position2\+D\+::operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} \&}]{p }\end{DoxyParamCaption}) const}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em p} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{structgcs_1_1position2_d_abc81ed20d4b5396ecdba30c1e9eb7751}\label{structgcs_1_1position2_d_abc81ed20d4b5396ecdba30c1e9eb7751}} 
+\index{gcs::position2D@{gcs::position2D}!operator/@{operator/}}
+\index{operator/@{operator/}!gcs::position2D@{gcs::position2D}}
+\doxysubsubsection{\texorpdfstring{operator/()}{operator/()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} position2\+D\+::operator/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} \&}]{p }\end{DoxyParamCaption}) const}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em p} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{structgcs_1_1position2_d_add31d4aefb127f9a002f9d8dbff62777}\label{structgcs_1_1position2_d_add31d4aefb127f9a002f9d8dbff62777}} 
+\index{gcs::position2D@{gcs::position2D}!operator==@{operator==}}
+\index{operator==@{operator==}!gcs::position2D@{gcs::position2D}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool position2\+D\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structgcs_1_1position2_d}{position2D}} \&}]{p }\end{DoxyParamCaption}) const}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em } & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structgcs_1_1position2_d_aa33fd46c72debcdc9e09fbd9e9660f20}\label{structgcs_1_1position2_d_aa33fd46c72debcdc9e09fbd9e9660f20}} 
+\index{gcs::position2D@{gcs::position2D}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!gcs::position2D@{gcs::position2D}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily double \& position2\+D\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em index} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{structgcs_1_1position2_d_a0648780094c997e7c20357799036f8af}\label{structgcs_1_1position2_d_a0648780094c997e7c20357799036f8af}} 
+\index{gcs::position2D@{gcs::position2D}!set@{set}}
+\index{set@{set}!gcs::position2D@{gcs::position2D}}
+\doxysubsubsection{\texorpdfstring{set()}{set()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void position2\+D\+::set (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em x} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em y} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structgcs_1_1position2_d_a60085557ea471b3cd522be5ec94a29f4}\label{structgcs_1_1position2_d_a60085557ea471b3cd522be5ec94a29f4}} 
+\index{gcs::position2D@{gcs::position2D}!set@{set}}
+\index{set@{set}!gcs::position2D@{gcs::position2D}}
+\doxysubsubsection{\texorpdfstring{set()}{set()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void position2\+D\+::set (\begin{DoxyParamCaption}\item[{std\+::array$<$ double, 2 $>$}]{arr }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em arr} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structgcs_1_1position2_d_a34e62d74513546a1d731d5aacad863b8}\label{structgcs_1_1position2_d_a34e62d74513546a1d731d5aacad863b8}} 
+\index{gcs::position2D@{gcs::position2D}!set\_x@{set\_x}}
+\index{set\_x@{set\_x}!gcs::position2D@{gcs::position2D}}
+\doxysubsubsection{\texorpdfstring{set\_x()}{set\_x()}}
+{\footnotesize\ttfamily void position2\+D\+::set\+\_\+x (\begin{DoxyParamCaption}\item[{double}]{x }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em x} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structgcs_1_1position2_d_a7f547589b1c53fc2e144aa47f1d59f31}\label{structgcs_1_1position2_d_a7f547589b1c53fc2e144aa47f1d59f31}} 
+\index{gcs::position2D@{gcs::position2D}!set\_y@{set\_y}}
+\index{set\_y@{set\_y}!gcs::position2D@{gcs::position2D}}
+\doxysubsubsection{\texorpdfstring{set\_y()}{set\_y()}}
+{\footnotesize\ttfamily void position2\+D\+::set\+\_\+y (\begin{DoxyParamCaption}\item[{double}]{y }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em y} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structgcs_1_1position2_d_acc773464530df4fe5299770a5b0aebb9}\label{structgcs_1_1position2_d_acc773464530df4fe5299770a5b0aebb9}} 
+\index{gcs::position2D@{gcs::position2D}!x@{x}}
+\index{x@{x}!gcs::position2D@{gcs::position2D}}
+\doxysubsubsection{\texorpdfstring{x()}{x()}}
+{\footnotesize\ttfamily double position2\+D\+::x (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{structgcs_1_1position2_d_a45925fdd6d48a7a97bc061abb49837dd}\label{structgcs_1_1position2_d_a45925fdd6d48a7a97bc061abb49837dd}} 
+\index{gcs::position2D@{gcs::position2D}!y@{y}}
+\index{y@{y}!gcs::position2D@{gcs::position2D}}
+\doxysubsubsection{\texorpdfstring{y()}{y()}}
+{\footnotesize\ttfamily double position2\+D\+::y (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{position_8hpp}{position.\+hpp}}\item 
+src/\mbox{\hyperlink{position_8cpp}{position.\+cpp}}\end{DoxyCompactItemize}
