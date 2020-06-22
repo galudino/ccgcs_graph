@@ -1,2 +1,69 @@
 /* Temporary files go here */
 
+    double angle_to(double x, double y) const;
+    double angle_to(const position2D& p) const;
+    double angle_to(std::array<double, 2>& arr) const;
+
+
+/**
+ *  @brief
+ *
+ *  @param[in]  x
+ *  @param[in]  y
+ *
+ *  @return
+ */
+double position2D::angle_to(double x, double y) const {
+    double hypotenuse = distance_to(x, y);
+    double dx = 0.0;
+    double dy = 0.0;
+    double opposite = 0.0;
+
+
+    return std::asin(opposite / hypotenuse);
+}
+
+/**
+ *  @brief
+ *
+ *  @param[in]  p
+ *
+ *  @return
+ */
+double position2D::angle_to(const position2D& p) const {
+    double hypotenuse = distance_to(p);
+
+    double dx = p.m_x - m_x;
+    double dy = p.m_y - m_y;
+
+    double result = 0.0;
+
+    if (dx > 0.0 && dy > 0.0) {
+        // +x, +y
+        result = std::asin(dy / hypotenuse);
+    } else if (dx > 0.0 && dy < 0.0) {
+        // +x, -y
+        result = std::acos(dx / hypotenuse);
+    } else if (dx < 0.0 && dy > 0.0) {
+        // -x, +y
+        result = std::asin(dy / hypotenuse);
+    } else if (dx < 0.0 && dy < 0.0) {
+        // -x, -y
+        result = std::acos(dy / hypotenuse);
+    }
+
+    return result;
+}
+
+/**
+ *  @brief
+ *
+ *  @param[in]  arr
+ *
+ *  @return
+ */
+double position2D::angle_to(std::array<double, 2>& arr) const {
+    double hypotenuse = distance_to(arr);
+
+    return 0.0;
+}

@@ -36,7 +36,7 @@ CSTD 				= -std=c++17
 DEBUG 				= -g
 OPTIMIZED           = -O3
 PTHREAD				= #-pthread
-MATH 				= #-lm
+MATH 				= -lm
 PEDANTIC			= -pedantic-errors
 
 SANTIIZED 			= #-fsanitize=address

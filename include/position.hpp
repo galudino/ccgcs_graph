@@ -31,15 +31,20 @@
 #ifndef POSITION_HPP
 #define POSITION_HPP
 
-#include <ostream>
 #include <array>
+#include <iostream>
 
 namespace gcs {
 struct position2D;
 struct position3D;
-const double epsilon = 0.0001f;
+
+const double epsilon = 0.00000001f;
+
 bool double_approx_eq(double a, double b);
-}
+
+double to_degrees(double radians);
+double to_radians(double degrees);
+} // namespace gcs
 
 /**
  *  @struct     gcs::position2D
@@ -50,6 +55,7 @@ public:
     position2D();
     position2D(double x, double y);
     position2D(const position2D& p);
+    position2D(std::array<double, 2>& arr);
     ~position2D();
 
     double x() const;
@@ -61,14 +67,20 @@ public:
     void set_y(double y);
 
     void set(double x, double y);
-    void set(std::array<double, 2> arr);
+    void set(const position2D& p);
+    void set(std::array<double, 2>& arr);
 
-    double distance(position2D& p) const;
+    double distance_to(double x, double y) const;
+    double distance_to(const position2D& p) const;
+    double distance_to(std::array<double, 2>& arr) const;
+
     void reset();
 
+    position2D& operator=(const position2D& p);
     double& operator[](int index) const;
 
     bool operator==(const position2D& p) const;
+    bool operator!=(const position2D& p) const;
 
     position2D operator+(const position2D& p) const;
     position2D operator-(const position2D& p) const;
@@ -76,6 +88,7 @@ public:
     position2D operator/(const position2D& p) const;
 
     friend std::ostream& operator<<(std::ostream& os, const position2D& p);
+
 private:
     double m_x;
     double m_y;
@@ -104,14 +117,20 @@ public:
     void set_z(double z);
 
     void set(double x, double y, double z);
-    void set(std::array<double, 3> arr);
+    void set(const position3D& p);
+    void set(std::array<double, 3>& arr);
 
-    double distance(position3D& p) const;
+    double distance_to(double x, double y, double z) const;
+    double distance_to(position3D& p) const;
+    double distance_to(std::array<double, 3>& arr) const;
+
     void reset();
 
+    position3D& operator=(const position3D& p);
     double& operator[](int index) const;
 
     bool operator==(const position3D& p) const;
+    bool operator!=(const position3D& p) const;
 
     position3D operator+(const position3D& p) const;
     position3D operator-(const position3D& p) const;
@@ -119,6 +138,7 @@ public:
     position3D operator/(const position3D& p) const;
 
     friend std::ostream& operator<<(std::ostream& os, const position3D& p);
+
 private:
     gcs::position2D m_2d;
     double m_z;

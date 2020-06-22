@@ -38,9 +38,8 @@
  *
  *  @return     exit status
  */
-int main(int argc, const char *argv[]) {
+int main(int argc, const char* argv[]) {
     /* Enter source code here... */
 
-    
     return EXIT_SUCCESS;
 }

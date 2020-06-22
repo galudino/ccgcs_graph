@@ -29,7 +29,7 @@
  */
 
 #include "header.h"
-
+#include <cmath>
 /**
  *  @brief  Program execution begins here
  *
@@ -38,20 +38,18 @@
  *
  *  @return     exit status
  */
-int main(int argc, const char *argv[]) {
+int main(int argc, const char* argv[]) {
     using pos2d = gcs::position2D;
     using pos3d = gcs::position3D;
 
-    pos2d p2;
+    pos2d u{4, 1};
+    pos2d v{7, 3};
 
-    p2[0] = 23.0;
-    p2[1] = 456.1;
+    pos3d w{4, 3, 9};
+    pos2d* p = (pos2d*)(&w);
 
-    pos3d p3(p2);
-
-    p3[2] = 85.7;
-
-    std::cout << p2 << "\n" << p3 << std::endl;
+    std::cout << *p << std::endl;
+    std::cout << w[2] << std::endl;
 
     return EXIT_SUCCESS;
 }
