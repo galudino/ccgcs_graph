@@ -28,6 +28,9 @@
  *  THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#define _USE_MATH_DEFINES
+#include <cmath>
+
 #include "position.hpp"
 #include <cmath>
 #include <memory>

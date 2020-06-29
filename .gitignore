@@ -6,7 +6,7 @@
 *.ko
 *.obj
 *.elf
-build/*.o
+build/*
 
 # Linker output
 *.ilk
@@ -36,6 +36,7 @@ build/*.o
 *.i*86
 *.x86_64
 *.hex
+bin/*
 
 # Debug files
 *.dSYM/
@@ -57,3 +58,4 @@ dkms.conf
 .swp
 main
 test
+_doc_tests/*
