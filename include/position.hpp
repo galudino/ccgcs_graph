@@ -54,8 +54,8 @@ struct gcs::position2D {
 public:
     position2D();
     position2D(double x, double y);
-    position2D(const position2D& p);
-    position2D(std::array<double, 2>& arr);
+    position2D(const position2D &p);
+    position2D(std::array<double, 2> &arr);
     ~position2D();
 
     double x() const;
@@ -67,27 +67,27 @@ public:
     void set_y(double y);
 
     void set(double x, double y);
-    void set(const position2D& p);
-    void set(std::array<double, 2>& arr);
+    void set(const position2D &p);
+    void set(std::array<double, 2> &arr);
 
     double distance_to(double x, double y) const;
-    double distance_to(const position2D& p) const;
-    double distance_to(std::array<double, 2>& arr) const;
+    double distance_to(const position2D &p) const;
+    double distance_to(std::array<double, 2> &arr) const;
 
     void reset();
 
-    position2D& operator=(const position2D& p);
-    double& operator[](int index) const;
+    position2D &operator=(const position2D &p);
+    double &operator[](int index) const;
 
-    bool operator==(const position2D& p) const;
-    bool operator!=(const position2D& p) const;
+    bool operator==(const position2D &p) const;
+    bool operator!=(const position2D &p) const;
 
-    position2D operator+(const position2D& p) const;
-    position2D operator-(const position2D& p) const;
-    position2D operator*(const position2D& p) const;
-    position2D operator/(const position2D& p) const;
+    position2D operator+(const position2D &p) const;
+    position2D operator-(const position2D &p) const;
+    position2D operator*(const position2D &p) const;
+    position2D operator/(const position2D &p) const;
 
-    friend std::ostream& operator<<(std::ostream& os, const position2D& p);
+    friend std::ostream &operator<<(std::ostream &os, const position2D &p);
 
 private:
     double m_x;
@@ -102,8 +102,8 @@ struct gcs::position3D {
 public:
     position3D();
     position3D(double x, double y, double z);
-    position3D(const position3D& p);
-    position3D(const position2D& p);
+    position3D(const position3D &p);
+    position3D(const position2D &p);
     ~position3D();
 
     double x() const;
@@ -117,27 +117,27 @@ public:
     void set_z(double z);
 
     void set(double x, double y, double z);
-    void set(const position3D& p);
-    void set(std::array<double, 3>& arr);
+    void set(const position3D &p);
+    void set(std::array<double, 3> &arr);
 
     double distance_to(double x, double y, double z) const;
-    double distance_to(position3D& p) const;
-    double distance_to(std::array<double, 3>& arr) const;
+    double distance_to(position3D &p) const;
+    double distance_to(std::array<double, 3> &arr) const;
 
     void reset();
 
-    position3D& operator=(const position3D& p);
-    double& operator[](int index) const;
+    position3D &operator=(const position3D &p);
+    double &operator[](int index) const;
 
-    bool operator==(const position3D& p) const;
-    bool operator!=(const position3D& p) const;
+    bool operator==(const position3D &p) const;
+    bool operator!=(const position3D &p) const;
 
-    position3D operator+(const position3D& p) const;
-    position3D operator-(const position3D& p) const;
-    position3D operator*(const position3D& p) const;
-    position3D operator/(const position3D& p) const;
+    position3D operator+(const position3D &p) const;
+    position3D operator-(const position3D &p) const;
+    position3D operator*(const position3D &p) const;
+    position3D operator/(const position3D &p) const;
 
-    friend std::ostream& operator<<(std::ostream& os, const position3D& p);
+    friend std::ostream &operator<<(std::ostream &os, const position3D &p);
 
 private:
     gcs::position2D m_2d;

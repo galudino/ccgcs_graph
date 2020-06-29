@@ -38,7 +38,7 @@
  *
  *  @return     exit status
  */
-int main(int argc, const char* argv[]) {
+int main(int argc, const char *argv[]) {
     using pos2d = gcs::position2D;
     using pos3d = gcs::position3D;
 
@@ -46,7 +46,7 @@ int main(int argc, const char* argv[]) {
     pos2d v{7, 3};
 
     pos3d w{4, 3, 9};
-    pos2d* p = (pos2d*)(&w);
+    pos2d *p = (pos2d *)(&w);
 
     std::cout << *p << std::endl;
     std::cout << w[2] << std::endl;

@@ -92,7 +92,7 @@ position2D::position2D(double x, double y) : m_x(x), m_y(y) {
  *
  *  @param[in]  p
  */
-position2D::position2D(const position2D& p) : m_x(p.m_x), m_y(p.m_y) {
+position2D::position2D(const position2D &p) : m_x(p.m_x), m_y(p.m_y) {
 }
 
 /**
@@ -100,7 +100,7 @@ position2D::position2D(const position2D& p) : m_x(p.m_x), m_y(p.m_y) {
  *
  *  @param[in]  arr
  */
-position2D::position2D(std::array<double, 2>& arr) : m_x(arr[0]), m_y(arr[1]) {
+position2D::position2D(std::array<double, 2> &arr) : m_x(arr[0]), m_y(arr[1]) {
 }
 
 /**
@@ -170,7 +170,7 @@ void position2D::set(double x, double y) {
  *
  *  @param[in]  p
  */
-void position2D::set(const position2D& p) {
+void position2D::set(const position2D &p) {
     m_x = p.m_x;
     m_y = p.m_y;
 }
@@ -180,7 +180,7 @@ void position2D::set(const position2D& p) {
  *
  *  @param[in]  arr
  */
-void position2D::set(std::array<double, 2>& arr) {
+void position2D::set(std::array<double, 2> &arr) {
     m_x = arr[0];
     m_y = arr[1];
 }
@@ -208,7 +208,7 @@ double position2D::distance_to(double x, double y) const {
  *
  *  @return
  */
-double position2D::distance_to(const position2D& p) const {
+double position2D::distance_to(const position2D &p) const {
     double dx = p.m_x - m_x;
     double dy = p.m_y - m_y;
 
@@ -223,7 +223,7 @@ double position2D::distance_to(const position2D& p) const {
  *
  *  @return
  */
-double position2D::distance_to(std::array<double, 2>& arr) const {
+double position2D::distance_to(std::array<double, 2> &arr) const {
     double dx = arr[0] - m_x;
     double dy = arr[1] - m_y;
 
@@ -243,7 +243,7 @@ inline void position2D::reset() {
  *
  *  @param[in]  p
  */
-position2D& position2D::operator=(const position2D& p) {
+position2D &position2D::operator=(const position2D &p) {
     m_x = p.m_x;
     m_y = p.m_y;
 
@@ -257,8 +257,8 @@ position2D& position2D::operator=(const position2D& p) {
  *
  *  @return
  */
-inline double& position2D::operator[](int index) const {
-    double* base = (double*)(&m_x);
+inline double &position2D::operator[](int index) const {
+    double *base = (double *)(&m_x);
     return *(base + index);
 }
 
@@ -269,7 +269,7 @@ inline double& position2D::operator[](int index) const {
  *
  *  @return
  */
-bool position2D::operator==(const position2D& p) const {
+bool position2D::operator==(const position2D &p) const {
     bool xeql = gcs::double_approx_eq(m_x, p.m_x);
     bool yeql = gcs::double_approx_eq(m_y, p.m_y);
 
@@ -283,7 +283,7 @@ bool position2D::operator==(const position2D& p) const {
  *
  *  @return
  */
-bool position2D::operator!=(const position2D& p) const {
+bool position2D::operator!=(const position2D &p) const {
     return !(*(this) == p);
 }
 
@@ -294,7 +294,7 @@ bool position2D::operator!=(const position2D& p) const {
  *
  *  @return
  */
-position2D position2D::operator+(const position2D& p) const {
+position2D position2D::operator+(const position2D &p) const {
     double x = m_x + p.m_x;
     double y = m_y + p.m_y;
 
@@ -308,7 +308,7 @@ position2D position2D::operator+(const position2D& p) const {
  *
  *  @return
  */
-position2D position2D::operator-(const position2D& p) const {
+position2D position2D::operator-(const position2D &p) const {
     double x = m_x - p.m_x;
     double y = m_y - p.m_y;
 
@@ -322,7 +322,7 @@ position2D position2D::operator-(const position2D& p) const {
  *
  *  @return
  */
-position2D position2D::operator*(const position2D& p) const {
+position2D position2D::operator*(const position2D &p) const {
     double x = (m_x * p.m_x) + (m_x * p.m_y);
     double y = (m_y * p.m_y) + (m_y * p.m_y);
 
@@ -336,7 +336,7 @@ position2D position2D::operator*(const position2D& p) const {
  *
  *  @return
  */
-position2D position2D::operator/(const position2D& p) const {
+position2D position2D::operator/(const position2D &p) const {
     double x = (m_x / p.m_x) + (m_x / p.m_y);
     double y = (m_y / p.m_y) + (m_y / p.m_y);
 
@@ -351,7 +351,7 @@ position2D position2D::operator/(const position2D& p) const {
  *
  *  @return
  */
-std::ostream& gcs::operator<<(std::ostream& os, const position2D& p) {
+std::ostream &gcs::operator<<(std::ostream &os, const position2D &p) {
     os << "(" << p.m_x << ", " << p.m_y << ")";
     return os;
 }
@@ -377,7 +377,7 @@ position3D::position3D(double x, double y, double z) : m_2d(x, y), m_z(z) {
  *
  *  @param[in]  p
  */
-position3D::position3D(const position3D& p)
+position3D::position3D(const position3D &p)
     : m_2d(p.m_2d[0], p.m_2d[1]), m_z(p.m_z) {
 }
 
@@ -386,7 +386,7 @@ position3D::position3D(const position3D& p)
  *
  *  @param[in]  p
  */
-position3D::position3D(const position2D& p) : m_2d(p), m_z(0.0) {
+position3D::position3D(const position2D &p) : m_2d(p), m_z(0.0) {
 }
 
 /**
@@ -476,7 +476,7 @@ void position3D::set(double x, double y, double z) {
  *
  *  @param[in]  p
  */
-void position3D::set(const position3D& p) {
+void position3D::set(const position3D &p) {
     m_2d[0] = p.m_2d[0];
     m_2d[1] = p.m_2d[1];
     m_z = p.m_z;
@@ -487,7 +487,7 @@ void position3D::set(const position3D& p) {
  *
  *  @param[in]  arr
  */
-void position3D::set(std::array<double, 3>& arr) {
+void position3D::set(std::array<double, 3> &arr) {
     m_2d[0] = arr[0];
     m_2d[1] = arr[1];
     m_z = arr[2];
@@ -518,7 +518,7 @@ double position3D::distance_to(double x, double y, double z) const {
  *
  *  @return
  */
-double position3D::distance_to(position3D& p) const {
+double position3D::distance_to(position3D &p) const {
     double dx = p.m_2d[0] - m_2d[0];
     double dy = p.m_2d[1] - m_2d[1];
     double dz = p.m_z - m_z;
@@ -534,7 +534,7 @@ double position3D::distance_to(position3D& p) const {
  *
  *  @return
  */
-double position3D::distance_to(std::array<double, 3>& arr) const {
+double position3D::distance_to(std::array<double, 3> &arr) const {
     double dx = arr[0] - m_2d[0];
     double dy = arr[1] - m_2d[1];
     double dz = arr[2] - m_z;
@@ -557,7 +557,7 @@ void position3D::reset() {
  *
  *  @return
  */
-position3D& position3D::operator=(const position3D& p) {
+position3D &position3D::operator=(const position3D &p) {
     m_2d[0] = p.m_2d[0];
     m_2d[1] = p.m_2d[1];
     m_z = p.m_2d[2];
@@ -572,7 +572,7 @@ position3D& position3D::operator=(const position3D& p) {
  *
  *  @return
  */
-double& position3D::operator[](int index) const {
+double &position3D::operator[](int index) const {
     return m_2d[index];
 }
 
@@ -583,7 +583,7 @@ double& position3D::operator[](int index) const {
  *
  *  @return
  */
-bool position3D::operator==(const position3D& p) const {
+bool position3D::operator==(const position3D &p) const {
     bool xeql = gcs::double_approx_eq(m_2d[0], p.m_2d[0]);
     bool yeql = gcs::double_approx_eq(m_2d[1], p.m_2d[1]);
     bool zeql = gcs::double_approx_eq(m_z, p.m_z);
@@ -598,7 +598,7 @@ bool position3D::operator==(const position3D& p) const {
  *
  *  @return
  */
-bool position3D::operator!=(const position3D& p) const {
+bool position3D::operator!=(const position3D &p) const {
     return !(*this == p);
 }
 
@@ -609,7 +609,7 @@ bool position3D::operator!=(const position3D& p) const {
  *
  *  @return
  */
-position3D position3D::operator+(const position3D& p) const {
+position3D position3D::operator+(const position3D &p) const {
     double x = m_2d[0] + p.m_2d[0];
     double y = m_2d[1] + p.m_2d[1];
     double z = m_z + p.m_z;
@@ -624,7 +624,7 @@ position3D position3D::operator+(const position3D& p) const {
  *
  *  @return
  */
-position3D position3D::operator-(const position3D& p) const {
+position3D position3D::operator-(const position3D &p) const {
     double x = m_2d[0] - p.m_2d[0];
     double y = m_2d[1] - p.m_2d[1];
     double z = m_z - p.m_z;
@@ -639,7 +639,7 @@ position3D position3D::operator-(const position3D& p) const {
  *
  *  @return
  */
-position3D position3D::operator*(const position3D& p) const {
+position3D position3D::operator*(const position3D &p) const {
     double x =
         (m_2d[0] * p.m_2d[0]) + (m_2d[0] * p.m_2d[1]) + (m_2d[0] * p.m_z);
     double y =
@@ -656,7 +656,7 @@ position3D position3D::operator*(const position3D& p) const {
  *
  *  @return
  */
-position3D position3D::operator/(const position3D& p) const {
+position3D position3D::operator/(const position3D &p) const {
     double x =
         (m_2d[0] / p.m_2d[0]) + (m_2d[0] / p.m_2d[1]) + (m_2d[0] / p.m_z);
     double y =
@@ -674,7 +674,7 @@ position3D position3D::operator/(const position3D& p) const {
  *
  *  @return
  */
-std::ostream& gcs::operator<<(std::ostream& os, const position3D& p) {
+std::ostream &gcs::operator<<(std::ostream &os, const position3D &p) {
     os << "(" << p.m_2d.x() << ", " << p.m_2d.y() << ", " << p.m_z << ")";
     return os;
 }

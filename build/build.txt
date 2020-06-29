@@ -1,2 +1,2 @@
-/* Build files (.o) go here. */
+/* CMake build output directories will go here. */
 
