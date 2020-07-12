@@ -42,6 +42,6 @@
 #include <thread>
 #include <vector>
 
-#include "position.hpp"
+#include "point.hpp"
 
 #endif /* HEADER_HPP */

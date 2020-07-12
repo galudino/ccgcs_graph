@@ -1,6 +1,6 @@
 /**
- *  @file       position.hpp
- *  @brief      Header file for a position ADT
+ *  @file       point.hpp
+ *  @brief      Header file for a point ADT
  *
  *  @author     Gemuele Aludino
  *  @date       20 Jun 2020
@@ -28,15 +28,15 @@
  *  THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef POSITION_HPP
-#define POSITION_HPP
+#ifndef POINT_HPP
+#define POINT_HPP
 
 #include <array>
 #include <iostream>
 
 namespace gcs {
-struct position2D;
-struct position3D;
+class point2D;
+class point3D;
 
 const double epsilon = 0.00000001f;
 
@@ -47,64 +47,59 @@ double to_radians(double degrees);
 } // namespace gcs
 
 /**
- *  @struct     gcs::position2D
+ *  @class      gcs::point2D
  *  @brief      An abstraction for a two-dimensional Cartesian coordinate
  */
-struct gcs::position2D {
+class gcs::point2D {
 public:
-    position2D();
-    position2D(double x, double y);
-    position2D(const position2D &p);
-    position2D(std::array<double, 2> &arr);
-    ~position2D();
-
+    point2D();
+    point2D(double x, double y);
+    point2D(std::array<double, 2> &arr);
+    point2D(const point2D &p);
+    ~point2D();
+    
     double x() const;
     double y() const;
-
+    
     std::array<double, 2> get() const;
-
+    
     void set_x(double x);
     void set_y(double y);
-
+    
     void set(double x, double y);
-    void set(const position2D &p);
+    void set(const point2D &p);
     void set(std::array<double, 2> &arr);
-
-    double distance_to(double x, double y) const;
-    double distance_to(const position2D &p) const;
-    double distance_to(std::array<double, 2> &arr) const;
-
+    
     void reset();
-
-    position2D &operator=(const position2D &p);
+    
+    point2D &operator=(const point2D &p);
     double &operator[](int index) const;
-
-    bool operator==(const position2D &p) const;
-    bool operator!=(const position2D &p) const;
-
-    position2D operator+(const position2D &p) const;
-    position2D operator-(const position2D &p) const;
-    position2D operator*(const position2D &p) const;
-    position2D operator/(const position2D &p) const;
-
-    friend std::ostream &operator<<(std::ostream &os, const position2D &p);
-
+    
+    bool operator==(const point2D &p);
+    bool operator!=(const point2D &p);
+        
+    friend std::ostream &operator<<(std::ostream &os, const point2D &p);
+    
+    static double distance(double u_x, double u_y, double v_x, double v_y);
+    static double distance(const point2D &u, const point2D &v);
+    static double distance(std::array<double, 2> &arr_u, std::array<double, 2> &arr_v);
 private:
     double m_x;
     double m_y;
 };
 
 /**
- *  @struct     gcs::position3D
+ *  @class      gcs::point3D
  *  @brief      An abstraction for a three-dimensional Cartesian coordinate
  */
-struct gcs::position3D {
+class gcs::point3D {
 public:
-    position3D();
-    position3D(double x, double y, double z);
-    position3D(const position3D &p);
-    position3D(const position2D &p);
-    ~position3D();
+    point3D();
+    point3D(double x, double y, double z);
+    point3D(std::array<double, 3> &arr);
+    point3D(const point3D &p);
+    point3D(const point2D &p);
+    ~point3D();
 
     double x() const;
     double y() const;
@@ -117,31 +112,25 @@ public:
     void set_z(double z);
 
     void set(double x, double y, double z);
-    void set(const position3D &p);
+    void set(const point3D &p);
     void set(std::array<double, 3> &arr);
-
-    double distance_to(double x, double y, double z) const;
-    double distance_to(position3D &p) const;
-    double distance_to(std::array<double, 3> &arr) const;
 
     void reset();
 
-    position3D &operator=(const position3D &p);
+    point3D &operator=(const point3D &p);
     double &operator[](int index) const;
 
-    bool operator==(const position3D &p) const;
-    bool operator!=(const position3D &p) const;
+    bool operator==(const point3D &p) const;
+    bool operator!=(const point3D &p) const;
 
-    position3D operator+(const position3D &p) const;
-    position3D operator-(const position3D &p) const;
-    position3D operator*(const position3D &p) const;
-    position3D operator/(const position3D &p) const;
-
-    friend std::ostream &operator<<(std::ostream &os, const position3D &p);
-
+    friend std::ostream &operator<<(std::ostream &os, const point3D &p);
+    
+    static double distance(double u_x, double u_y, double u_z, double v_x, double v_y, double v_z);
+    static double distance(const point3D &u, const point3D &v);
+    static double distance(std::array<double, 3> &arr_u, std::array<double, 3> &arr_v);
 private:
-    gcs::position2D m_2d;
+    gcs::point2D m_2d;
     double m_z;
 };
 
-#endif /* POSITION_HPP */
+#endif /* POINT_HPP */

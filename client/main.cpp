@@ -30,6 +30,9 @@
 
 #include "header.hpp"
 
+using gcs::point2D;
+using gcs::point3D;
+
 /**
  *  @brief  Program execution begins here
  *
@@ -39,17 +42,10 @@
  *  @return     exit status
  */
 int main(int argc, const char *argv[]) {
-    using pos2d = gcs::position2D;
-    using pos3d = gcs::position3D;
-
-    pos2d u{4, 1};
-    pos2d v{7, 3};
-
-    pos3d w{4, 3, 9};
-    pos2d *p = (pos2d *)(&w);
-
-    std::cout << *p << std::endl;
-    std::cout << w[2] << std::endl;
-
+    point2D p0{3, 5};
+    point2D p1{2, 4};
+    
+    auto magnitude = point2D::distance(p0, p1);
+    std::cout << "magnitude: " << magnitude << std::endl;
     return EXIT_SUCCESS;
 }
