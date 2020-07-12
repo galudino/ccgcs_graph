@@ -42,6 +42,13 @@
 #include <thread>
 #include <vector>
 
-#include "point.hpp"
+namespace gcs {
+const double epsilon = 0.00000001f;
+
+bool double_approx_eq(double a, double b);
+
+double to_degrees(double radians);
+double to_radians(double degrees);
+} // namespace gcs
 
 #endif /* HEADER_HPP */

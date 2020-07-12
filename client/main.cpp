@@ -28,10 +28,13 @@
  *  THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "header.hpp"
+#include "point.hpp"
+#include "vec.hpp"
 
 using gcs::point2D;
 using gcs::point3D;
+using gcs::vec2D;
+using gcs::vec3D;
 
 /**
  *  @brief  Program execution begins here
@@ -42,10 +45,13 @@ using gcs::point3D;
  *  @return     exit status
  */
 int main(int argc, const char *argv[]) {
-    point2D p0{3, 5};
-    point2D p1{2, 4};
+    vec2D v0{4, 3};
     
-    auto magnitude = point2D::distance(p0, p1);
-    std::cout << "magnitude: " << magnitude << std::endl;
+    std::cout << v0 << std::endl;
+    std::cout << v0.angle() << std::endl;
+    
+    std::cout << v0.angle_x() << std::endl;
+    std::cout << v0.angle_y() << std::endl;
+    
     return EXIT_SUCCESS;
 }

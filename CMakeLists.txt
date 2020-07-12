@@ -75,11 +75,13 @@ set(DIR_TESTS "tests")
 
 set(FILENAME_HEADER_HPP "header.hpp")
 set(FILENAME_POINT_HPP "point.hpp")
+set(FILENAME_VEC_HPP "vec.hpp")
 
 ## Use ${ALL_HEADERS} to reference all .hpp files in DIR_INCLUDE
 set(ALL_HEADERS 
     "${DIR_INCLUDE}/${FILENAME_HEADER_HPP}"
     "${DIR_INCLUDE}/${FILENAME_POINT_HPP}"
+    "${DIR_INCLUDE}/${FILENAME_VEC_HPP}"
 )
 
 ## --------------------------------------------------------------------- ##
@@ -88,11 +90,13 @@ set(ALL_HEADERS
 
 set(FILENAME_SOURCE_CPP "source.cpp")
 set(FILENAME_POINT_CPP "point.cpp")
+set(FILENAME_VEC_CPP "vec.cpp")
 
 ## All .cpp files in DIR_SRC
 set(ALL_SOURCES 
     "${DIR_SRC}/${FILENAME_SOURCE_CPP}"
     "${DIR_SRC}/${FILENAME_POINT_CPP}"
+    "${DIR_SRC}/${FILENAME_VEC_CPP}"
 )
 
 ## --------------------------------------------------------------------- ##

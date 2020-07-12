@@ -27,54 +27,20 @@
  *  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
  *  THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 #define _USE_MATH_DEFINES
 #include <cmath>
 
-#include "point.hpp"
-#include <cmath>
 #include <memory>
+
+#include "header.hpp"
+#include "point.hpp"
 
 using gcs::point2D;
 
 /**
  *  @brief
- *
- *  @param[in]  a
- *  @param[in]  b
- *
- *  @return
  */
-inline bool gcs::double_approx_eq(double a, double b) {
-    return std::abs(a - b) < gcs::epsilon;
-}
-
-/**
- *  @brief
- *
- *  @param[in]  radians
- *
- *  @return
- */
-double gcs::to_degrees(double radians) {
-    return radians * (180.0f / M_PI);
-}
-
-/**
- *  @brief
- *
- *  @param[in]  degrees
- *
- *  @return
- */
-double gcs::to_radians(double degrees) {
-    return degrees * (M_PI / 180.0f);
-}
-
-/**
- *  @brief
- */
-point2D::point2D() : m_x(0.0), m_y(0.0) {
+point2D::point2D() : m_x{0.0}, m_y{0.0} {
 }
 
 /**
@@ -83,7 +49,7 @@ point2D::point2D() : m_x(0.0), m_y(0.0) {
  *  @param[in]  x
  *  @param[in]  y
  */
-point2D::point2D(double x, double y) : m_x(x), m_y(y) {
+point2D::point2D(double x, double y) : m_x{x}, m_y{y} {
 }
 
 /**
@@ -91,7 +57,7 @@ point2D::point2D(double x, double y) : m_x(x), m_y(y) {
  *
  *  @param[in]  p
  */
-point2D::point2D(const point2D &p) : m_x(p.m_x), m_y(p.m_y) {
+point2D::point2D(const point2D &p) : m_x{p.m_x}, m_y{p.m_y} {
 }
 
 /**
@@ -99,7 +65,7 @@ point2D::point2D(const point2D &p) : m_x(p.m_x), m_y(p.m_y) {
  *
  *  @param[in]  arr
  */
-point2D::point2D(std::array<double, 2> &arr) : m_x(arr[0]), m_y(arr[1]) {
+point2D::point2D(std::array<double, 2> &arr) : m_x{arr[0]}, m_y{arr[1]} {
 }
 
 /**
@@ -301,7 +267,7 @@ using gcs::point3D;
 /**
  *  @brief
  */
-point3D::point3D() : m_2d(), m_z(0.0) {
+point3D::point3D() : m_2d{}, m_z{0.0} {
 }
 
 /**
@@ -311,7 +277,7 @@ point3D::point3D() : m_2d(), m_z(0.0) {
  *  @param[in]  y
  *  @param[in]  z
  */
-point3D::point3D(double x, double y, double z) : m_2d(x, y), m_z(z) {
+point3D::point3D(double x, double y, double z) : m_2d{x, y}, m_z{z} {
 }
 
 /**
@@ -320,7 +286,7 @@ point3D::point3D(double x, double y, double z) : m_2d(x, y), m_z(z) {
  *  @param[in]  arr
  */
 point3D::point3D(std::array<double, 3> &arr)
-    : m_2d(arr[0], arr[1]), m_z(arr[2]) {
+: m_2d{arr[0], arr[1]}, m_z{arr[2]} {
 }
 
 /**
@@ -328,7 +294,7 @@ point3D::point3D(std::array<double, 3> &arr)
  *
  *  @param[in]  p
  */
-point3D::point3D(const point3D &p) : m_2d(p.m_2d[0], p.m_2d[1]), m_z(p.m_z) {
+point3D::point3D(const point3D &p) : m_2d{p.m_2d[0], p.m_2d[1]}, m_z{p.m_z} {
 }
 
 /**
@@ -336,7 +302,7 @@ point3D::point3D(const point3D &p) : m_2d(p.m_2d[0], p.m_2d[1]), m_z(p.m_z) {
  *
  *  @param[in]  p
  */
-point3D::point3D(const point2D &p) : m_2d(p), m_z(0.0) {
+point3D::point3D(const point2D &p) : m_2d{p}, m_z{0.0} {
 }
 
 /**
@@ -483,7 +449,7 @@ double &point3D::operator[](int index) const {
  *
  *  @return
  */
-bool point3D::operator==(const point3D &p) const {
+bool point3D::operator==(const point3D &p) {
     bool xeql = gcs::double_approx_eq(m_2d[0], p.m_2d[0]);
     bool yeql = gcs::double_approx_eq(m_2d[1], p.m_2d[1]);
     bool zeql = gcs::double_approx_eq(m_z, p.m_z);
@@ -498,7 +464,7 @@ bool point3D::operator==(const point3D &p) const {
  *
  *  @return
  */
-bool point3D::operator!=(const point3D &p) const {
+bool point3D::operator!=(const point3D &p) {
     return !(*this == p);
 }
 

@@ -37,13 +37,6 @@
 namespace gcs {
 class point2D;
 class point3D;
-
-const double epsilon = 0.00000001f;
-
-bool double_approx_eq(double a, double b);
-
-double to_degrees(double radians);
-double to_radians(double degrees);
 } // namespace gcs
 
 /**
@@ -53,39 +46,44 @@ double to_radians(double degrees);
 class gcs::point2D {
 public:
     point2D();
+
     point2D(double x, double y);
     point2D(std::array<double, 2> &arr);
+
     point2D(const point2D &p);
+
     ~point2D();
-    
+
     double x() const;
     double y() const;
-    
+
     std::array<double, 2> get() const;
-    
+
     void set_x(double x);
     void set_y(double y);
-    
+
     void set(double x, double y);
     void set(const point2D &p);
     void set(std::array<double, 2> &arr);
-    
+
     void reset();
-    
+
     point2D &operator=(const point2D &p);
     double &operator[](int index) const;
-    
+
     bool operator==(const point2D &p);
     bool operator!=(const point2D &p);
-        
+
     friend std::ostream &operator<<(std::ostream &os, const point2D &p);
-    
+
     static double distance(double u_x, double u_y, double v_x, double v_y);
     static double distance(const point2D &u, const point2D &v);
-    static double distance(std::array<double, 2> &arr_u, std::array<double, 2> &arr_v);
+    static double distance(std::array<double, 2> &arr_u,
+                           std::array<double, 2> &arr_v);
+
 private:
-    double m_x;
-    double m_y;
+    double m_x; /**< x-coordinate  */
+    double m_y; /**< y-coordinate */
 };
 
 /**
@@ -95,10 +93,13 @@ private:
 class gcs::point3D {
 public:
     point3D();
+
     point3D(double x, double y, double z);
     point3D(std::array<double, 3> &arr);
+
     point3D(const point3D &p);
     point3D(const point2D &p);
+
     ~point3D();
 
     double x() const;
@@ -120,17 +121,20 @@ public:
     point3D &operator=(const point3D &p);
     double &operator[](int index) const;
 
-    bool operator==(const point3D &p) const;
-    bool operator!=(const point3D &p) const;
+    bool operator==(const point3D &p);
+    bool operator!=(const point3D &p);
 
     friend std::ostream &operator<<(std::ostream &os, const point3D &p);
-    
-    static double distance(double u_x, double u_y, double u_z, double v_x, double v_y, double v_z);
+
+    static double distance(double u_x, double u_y, double u_z, double v_x,
+                           double v_y, double v_z);
     static double distance(const point3D &u, const point3D &v);
-    static double distance(std::array<double, 3> &arr_u, std::array<double, 3> &arr_v);
+    static double distance(std::array<double, 3> &arr_u,
+                           std::array<double, 3> &arr_v);
+
 private:
-    gcs::point2D m_2d;
-    double m_z;
+    gcs::point2D m_2d; /**< 2D portion of a 3D point, x and y coordinates */
+    double m_z;        /**< z-coordinate */
 };
 
 #endif /* POINT_HPP */
