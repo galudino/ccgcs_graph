@@ -46,6 +46,8 @@ using gcs::vec3D;
  */
 int main(int argc, const char *argv[]) {
     vec2D v0{4, 3};
+    v0.set_b(point2D{9, 5});
+    v0.set_b(9, 5);
 
     std::cout << v0 << std::endl;
     std::cout << "---------" << std::endl;
