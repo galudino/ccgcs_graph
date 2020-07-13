@@ -286,7 +286,7 @@ point3D::point3D(double x, double y, double z) : m_2d{x, y}, m_z{z} {
  *  @param[in]  arr
  */
 point3D::point3D(std::array<double, 3> &arr)
-: m_2d{arr[0], arr[1]}, m_z{arr[2]} {
+    : m_2d{arr[0], arr[1]}, m_z{arr[2]} {
 }
 
 /**

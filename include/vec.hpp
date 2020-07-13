@@ -44,13 +44,13 @@ class vec3D;
 class gcs::vec2D {
 public:
     vec2D();
-    
+
     vec2D(const point2D &b);
     vec2D(const point2D &a, const point2D &b);
-    
+
     vec2D(std::array<double, 2> &arr_b);
     vec2D(std::array<double, 2> &arr_a, std::array<double, 2> &arr_b);
-    
+
     vec2D(double b_x, double b_y);
     vec2D(double a_x, double a_y, double b_x, double b_y);
 
@@ -111,8 +111,13 @@ class gcs::vec3D {
 public:
     vec3D();
 
+    vec3D(const point3D &b);
     vec3D(const point3D &a, const point3D &b);
+
+    vec3D(std::array<double, 3> &arr_b);
     vec3D(std::array<double, 3> &arr_a, std::array<double, 3> &arr_b);
+
+    vec3D(double b_x, double b_y, double b_z);
     vec3D(double a_x, double a_y, double a_z, double b_x, double b_y,
           double b_z);
 
@@ -139,6 +144,8 @@ public:
              double b_z);
     void set(std::array<double, 3> &a, std::array<double, 3> &b);
 
+    void reset();
+
     vec3D &operator=(const vec3D &v);
     point3D &operator[](int index);
 
@@ -152,6 +159,9 @@ public:
 
     double magnitude() const;
     double angle() const;
+    double angle_x() const;
+    double angle_y() const;
+    double angle_z() const;
     double angle(vec3D &v) const;
 
     double dx() const;
@@ -160,8 +170,8 @@ public:
 
     std::array<double, 3> components() const;
 
-    static double dot_product(vec3D &u, vec3D &v);
-    static double cross_product(vec3D &u, vec3D &v);
+    static double dot_product(const vec3D &u, const vec3D &v);
+    static vec3D cross_product(const vec3D &u, const vec3D &v);
 
 private:
     point3D m_a; /**< Starting position of 3D vector */

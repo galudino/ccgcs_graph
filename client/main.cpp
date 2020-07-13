@@ -46,12 +46,13 @@ using gcs::vec3D;
  */
 int main(int argc, const char *argv[]) {
     vec2D v0{4, 3};
-    
+
     std::cout << v0 << std::endl;
+    std::cout << "---------" << std::endl;
     std::cout << v0.angle() << std::endl;
-    
-    std::cout << v0.angle_x() << std::endl;
-    std::cout << v0.angle_y() << std::endl;
-    
+    std::cout << "---------" << std::endl;
+    std::cout << "Angle with v0 and x-axis: " << v0.angle_x() << std::endl;
+    std::cout << "Angle with v0 and y-axis: " << v0.angle_y() << std::endl;
+
     return EXIT_SUCCESS;
 }
