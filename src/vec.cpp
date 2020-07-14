@@ -326,11 +326,17 @@ vec2D vec2D::operator-(const vec2D &v) {
  *  @return
  */
 std::ostream &gcs::operator<<(std::ostream &os, const vec2D &v) {
-    os << "a = " << v.m_a << "\t"
-       << "b = " << v.m_b << std::endl
-       << "magnitude = " << v.magnitude() << std::endl
-       << "angle = " << v.angle() << "˚";
-
+    os << "------------------------------------------------" << std::endl
+       << "address        \t(" << &v << ")\t\tvec2D" << std::endl
+       << "------------------------------------------------" << std::endl
+       << "start point (a)\t" << v.m_a << std::endl
+       << "end point   (b)\t" << v.m_b << std::endl
+       << "magnitude      \t" << v.magnitude() << std::endl
+       << "x-component    \t" << v.dx() << std::endl
+       << "y-component    \t" << v.dy() << std::endl
+       << "angle x-axis   \t" << v.angle_x() << "˚" << std::endl
+       << "angle y-axis   \t" << v.angle_y() << "˚" << std::endl
+       << "================================================" << std::endl;
     return os;
 }
 
@@ -420,10 +426,7 @@ std::array<double, 2> vec2D::components() const {
  *  @return
  */
 double vec2D::dot_product(const vec2D &u, const vec2D &v) {
-    double A = u.dx() * v.dx();
-    double B = u.dy() * v.dy();
-
-    return A + B;
+    return gcs::dot_product<2>(u.components().data(), v.components().data());
 }
 
 using gcs::point3D;
@@ -727,10 +730,19 @@ vec3D vec3D::operator-(const vec3D &v) {
  *  @return
  */
 std::ostream &gcs::operator<<(std::ostream &os, const vec3D &v) {
-    os << "a = " << v.m_a << "\t"
-       << "b = " << v.m_b << std::endl
-       << "magnitude = " << v.magnitude() << std::endl
-       << "angle = " << v.angle() << "˚";
+    os << "------------------------------------------------" << std::endl
+       << "address        \t(" << &v << ")\t\tvec3D" << std::endl
+       << "------------------------------------------------" << std::endl
+       << "start point (a)\t" << v.m_a << std::endl
+       << "end point   (b)\t" << v.m_b << std::endl
+       << "magnitude      \t" << v.magnitude() << std::endl
+       << "x-component    \t" << v.dx() << std::endl
+       << "y-component    \t" << v.dy() << std::endl
+       << "z-component    \t" << v.dz() << std::endl
+       << "angle x-axis   \t" << v.angle_x() << "˚" << std::endl
+       << "angle y-axis   \t" << v.angle_y() << "˚" << std::endl
+       << "angle z-axis   \t" << v.angle_z() << "˚" << std::endl
+       << "================================================" << std::endl;
 
     return os;
 }
@@ -839,11 +851,7 @@ std::array<double, 3> vec3D::components() const {
  *  @return
  */
 double vec3D::dot_product(const vec3D &u, const vec3D &v) {
-    double A = u.dx() * v.dx();
-    double B = u.dy() * v.dy();
-    double C = u.dz() * v.dz();
-
-    return A + B + C;
+    return gcs::dot_product<3>(u.components().data(), v.components().data());
 }
 
 /**

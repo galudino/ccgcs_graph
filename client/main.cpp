@@ -27,7 +27,9 @@
  *  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
  *  THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+#include <cmath>
 
+#include "header.hpp"
 #include "point.hpp"
 #include "vec.hpp"
 
@@ -45,16 +47,40 @@ using gcs::vec3D;
  *  @return     exit status
  */
 int main(int argc, const char *argv[]) {
-    vec2D v0{4, 3};
-    v0.set_b(point2D{9, 5});
-    v0.set_b(9, 5);
+    // Create vec3D using a single point3D (extends from origin)
+    // or provide two point3D - the start and end points.
+    // vec3D v3d_0{point3D{3, 2, 1}};
+    // vec3D v3d_0{point3D{0, 0, 0}, point3D{3, 2, 1}};
 
-    std::cout << v0 << std::endl;
-    std::cout << "---------" << std::endl;
-    std::cout << v0.angle() << std::endl;
-    std::cout << "---------" << std::endl;
-    std::cout << "Angle with v0 and x-axis: " << v0.angle_x() << std::endl;
-    std::cout << "Angle with v0 and y-axis: " << v0.angle_y() << std::endl;
+    // Create vec3D using endpoint coordinates (extends from origin)
+    // or provide two sets of three doubles - the start and end points
+    // vec3D v3d_0{3, 2, 1}
+    // vec3D v3d_0{0, 0, 0, 3, 2, 1};
+
+    // Create vec3D using a single std::array<double, 3> (extends from origin)
+    // or provide two std::array<double, 3> - the start and end points
+    // vec3D v3d_0{{3, 2, 1}};
+    // vec3D v3d_0{{0, 0, 0}, {3, 2, 1}};
+
+    vec3D v3d_0{3, 2, 1};
+    vec3D v3d_1{-1, 1, 1};
+
+    std::cout << v3d_0 << "\n" << v3d_1 << std::endl;
+
+    std::cout << "dot product of v3d_0 and v3d_1 = "
+              << vec3D::dot_product(v3d_0, v3d_1) << std::endl;
+
+    // This vector, by components, is {6, 6, 6}.
+    // {3, 2, 1} is the start point, {9, 8, 7} is the end point.
+    vec3D v3d_2{{3, 2, 1}, {9, 8, 7}};
+
+    // This vector, by components, is also {6, 6, 6}.
+    // {0, 0, 0} is the start point, {6, 6, 6} is the end point.
+    // Although v3d_2 and v3d_3 have the same dimensions,
+    // they extend from different locations in space.
+    vec3D v3d_3{{6, 6, 6}};
+
+    std::cout << v3d_2 << "\n" << v3d_3 << std::endl;
 
     return EXIT_SUCCESS;
 }

@@ -79,7 +79,7 @@ point2D::~point2D() {
  *
  *  @return
  */
-inline double point2D::x() const {
+double point2D::x() const {
     return m_x;
 }
 
@@ -88,7 +88,7 @@ inline double point2D::x() const {
  *
  *  @return
  */
-inline double point2D::y() const {
+double point2D::y() const {
     return m_y;
 }
 
@@ -153,7 +153,7 @@ void point2D::set(std::array<double, 2> &arr) {
 /**
  *  @brief
  */
-inline void point2D::reset() {
+void point2D::reset() {
     m_x = m_y = 0.0;
 }
 
@@ -215,7 +215,7 @@ bool point2D::operator!=(const point2D &p) {
  *  @return
  */
 std::ostream &gcs::operator<<(std::ostream &os, const point2D &p) {
-    os << "(" << p.m_x << ", " << p.m_y << ")";
+    os << "(" << p.m_x << ", " << p.m_y << ")   \t(" << &p << ")";
     return os;
 }
 
@@ -230,11 +230,10 @@ std::ostream &gcs::operator<<(std::ostream &os, const point2D &p) {
  *  @return
  */
 double point2D::distance(double u_x, double u_y, double v_x, double v_y) {
-    double dx = std::abs(u_x - v_x);
-    double dy = std::abs(u_y - v_y);
+    double u[] = {u_x, u_y};
+    double v[] = {v_x, v_y};
 
-    double sum = std::pow(dx, 2.0) + std::pow(dy, 2.0);
-    return std::sqrt(sum);
+    return gcs::euclidean_distance<2>(u, v);
 }
 
 /**
@@ -246,7 +245,7 @@ double point2D::distance(double u_x, double u_y, double v_x, double v_y) {
  *  @return
  */
 double point2D::distance(const point2D &u, const point2D &v) {
-    return point2D::distance(u.x(), u.y(), v.x(), v.y());
+    return gcs::euclidean_distance<2>(u.get().data(), v.get().data());
 }
 
 /**
@@ -259,7 +258,7 @@ double point2D::distance(const point2D &u, const point2D &v) {
  */
 double point2D::distance(std::array<double, 2> &arr_u,
                          std::array<double, 2> &arr_v) {
-    return point2D::distance(arr_u[0], arr_u[1], arr_v[0], arr_v[1]);
+    return gcs::euclidean_distance<2>(arr_u.data(), arr_v.data());
 }
 
 using gcs::point3D;
@@ -477,7 +476,8 @@ bool point3D::operator!=(const point3D &p) {
  *  @return
  */
 std::ostream &gcs::operator<<(std::ostream &os, const point3D &p) {
-    os << "(" << p.m_2d.x() << ", " << p.m_2d.y() << ", " << p.m_z << ")";
+    os << "(" << p.m_2d.x() << ", " << p.m_2d.y() << ", " << p.m_z << ")\t("
+       << &p << ")";
     return os;
 }
 
@@ -495,12 +495,10 @@ std::ostream &gcs::operator<<(std::ostream &os, const point3D &p) {
  */
 double point3D::distance(double u_x, double u_y, double u_z, double v_x,
                          double v_y, double v_z) {
-    double dx = std::abs(u_x - v_x);
-    double dy = std::abs(u_y - v_y);
-    double dz = std::abs(u_z - v_z);
+    double u[] = {u_x, u_y, u_z};
+    double v[] = {v_x, v_y, v_z};
 
-    double sum = std::pow(dx, 2.0) + std::pow(dy, 2.0) + std::pow(dz, 2.0);
-    return std::sqrt(sum);
+    return gcs::euclidean_distance<3>(u, v);
 }
 
 /**
@@ -512,7 +510,7 @@ double point3D::distance(double u_x, double u_y, double u_z, double v_x,
  *  @return
  */
 double point3D::distance(const point3D &u, const point3D &v) {
-    return point3D::distance(u.x(), u.y(), u.z(), v.x(), v.y(), v.z());
+    return gcs::euclidean_distance<3>(u.get().data(), v.get().data());
 }
 
 /**
@@ -525,6 +523,5 @@ double point3D::distance(const point3D &u, const point3D &v) {
  */
 double point3D::distance(std::array<double, 3> &arr_u,
                          std::array<double, 3> &arr_v) {
-    return point3D::distance(arr_u[0], arr_u[1], arr_u[2], arr_v[0], arr_v[1],
-                             arr_v[2]);
+    return gcs::euclidean_distance<3>(arr_u.data(), arr_v.data());
 }
