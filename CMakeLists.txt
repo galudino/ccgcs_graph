@@ -145,7 +145,8 @@ set(TEST_TITLE_FAIL "_test_fail")
 ## --------------------------------------------------------------------- ##
 
 set(WALL "-Wall")
-set(WERR "-Werror")
+#set(WERR "-Werror")    ## Won't work in Windows 10. 
+                        ## Need different build options for Windows
 #set(WEXTRA "-Wextra")
 
 set(PEDANTIC "-pedantic-errors")
