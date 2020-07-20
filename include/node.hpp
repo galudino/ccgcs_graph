@@ -33,7 +33,4 @@
 
 #include "header.hpp"
 
-
-
-
 #endif /* NODE_HPP */

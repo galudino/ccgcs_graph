@@ -38,6 +38,8 @@ using gcs::point3D;
 using gcs::vec2D;
 using gcs::vec3D;
 
+using gcs::point;
+
 /**
  *  @brief  Program execution begins here
  *
@@ -61,7 +63,7 @@ int main(int argc, const char *argv[]) {
     // or provide two std::array<double, 3> - the start and end points
     // vec3D v3d_0{{3, 2, 1}};
     // vec3D v3d_0{{0, 0, 0}, {3, 2, 1}};
-
+    
     vec3D v3d_0{3, 2, 1};
     vec3D v3d_1{-1, 1, 1};
 
@@ -81,6 +83,19 @@ int main(int argc, const char *argv[]) {
     vec3D v3d_3{{6, 6, 6}};
 
     std::cout << v3d_2 << "\n" << v3d_3 << std::endl;
-
+    
+    point<2> a({0, 0});
+    point<2> b({4, 3});
+    b.set_x(2);
+    point<2> c;
+    
+    c = b;
+    if (c == b) {
+        std::cout << "same" << std::endl;
+    }
+    std::cout << "distance of x and y: " << point<2>::distance(point<2>{{0, 0}}, point<2>{{3, 4}}) << std::endl;
+    std::cout << "distance of a and b: " << point<2>::distance(a, b) << std::endl;
+    std::cout << "distance of u and v: " << point<2>::distance({0, 0}, {3, 4}) << std::endl;
+    
     return EXIT_SUCCESS;
 }

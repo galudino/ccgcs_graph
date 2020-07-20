@@ -1,10 +1,14 @@
-/*
- *  @file       edge.hpp
- *  @brief      Header file for an edge ADT
+/**
+ *  @file       vec_impl.tpp
+ *  @brief      Header file for a vector (trajectory) ADT (template
+ * implementation code)
  *
  *  @author     Gemuele Aludino
- *  @date       18 Jul 2020
+ *  @date       19 Jul 2020
  *  @copyright  Copyright © 2020 Gemuele Aludino
+ *
+ *  @note       This is an internal header file, used by vec.hpp.
+ *              You should not attempt to use it directly.
  */
 /**
  *  Copyright © 2020 Gemuele Aludino
@@ -28,7 +32,13 @@
  *  THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef EDGE_HPP
-#define EDGE_HPP
+#ifndef VEC_IMPL_TPP
+#define VEC_IMPL_TPP
 
-#endif /* EDGE_HPP */
+BEGIN_GCS_NAMESPACE
+
+
+
+END_GCS_NAMESPACE
+
+#endif /* VEC_IMPL_TPP */

@@ -39,7 +39,91 @@
 namespace gcs {
 class vec2D;
 class vec3D;
+
+template <size_t dimension, typename floating_precision = double>
+class vec;
+
+template <typename floating_precision>
+class vec<2, floating_precision>;
+
+template <typename floating_precision>
+class vec<3, floating_precision>;
 } // namespace gcs
+
+/**
+ *  @class  gcs::vec
+ *  @brief  A templated abstraction for a vector (trajectory) in the nth
+ * dimension
+ *
+ *  @tparam dimension    An integral value, n, representing the space R^n, i.e.
+ * R^2 for 2D or R^3 for 3D
+ *  @tparam floating_precision  A floating point type, i.e. float, double, long
+ * double
+ */
+template <size_t dimension, typename floating_precision>
+class gcs::vec {
+public:
+    using FloatType = floating_precision;
+    using Point = gcs::point<dimension, FloatType>;
+    using Coordinates = std::array<FloatType, dimension>;
+
+    vec();
+
+    vec(const Point &b);
+    vec(const Point &a, const Point &b);
+
+    vec(Coordinates &arr_b);
+    vec(Coordinates &arr_a, Coordinates &arr_b);
+
+    vec(const vec &v);
+
+    ~vec();
+
+    Point a() const;
+    Point b() const;
+
+    Coordinates get() const;
+
+    void set_a(const Point &a);
+    void set_b(const Point &b);
+
+    void set_a(Coordinates &arr_a);
+    void set_b(Coordinates &arr_b);
+
+    void set(const Point &a, const Point &b);
+    void set(Coordinates &arr_a, Coordinates &arr_b);
+
+    void reset();
+
+    vec &operator=(const vec &v);
+    Point &operator[](int index);
+
+    bool operator==(const vec &v);
+    bool operator!=(const vec &v);
+
+    vec operator+(const vec &v);
+    vec operator-(const vec &v);
+
+    friend std::ostream &operator<<(std::ostream &os, const vec &v);
+
+    FloatType magnitude() const;
+    FloatType angle() const;
+    FloatType angle(size_t axis) const;
+    FloatType angle(const vec &v) const;
+
+    FloatType component(size_t axis);
+
+    std::array<FloatType, dimension> components() const;
+
+    static FloatType dot_product(const vec &u, const vec &v);
+    static vec cross_product(const vec &u, const vec &v);
+
+private:
+    Point m_a; /**< Starting position of vector */
+    Point m_b; /**< Ending position of vector */
+};
+
+#include "vec_impl.tpp"
 
 class gcs::vec2D {
 public:
