@@ -32,8 +32,8 @@
 #define HEADER_HPP
 
 // For use with .tpp files only
-#define BEGIN_GCS_NAMESPACE namespace gcs {
-#define END_GCS_NAMESPACE } // namespace gcs
+#define BEGIN_GCS_NAMESPACE     namespace gcs {
+#define END_GCS_NAMESPACE       } // namespace gcs
 
 namespace gcs {
 const double epsilon = 0.00000001f;

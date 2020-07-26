@@ -38,7 +38,16 @@ using gcs::point3D;
 using gcs::vec2D;
 using gcs::vec3D;
 
-using gcs::point;
+double calculate_slope(const std::array<double, 3> &point_a, const std::array<double, 3> &point_b) {
+    double dx = point_b[0] - point_a[0];
+    double dy = point_b[1] - point_a[1];
+    double dz = point_b[2] - point_a[2];
+    
+    double rise = dz;
+    double run = std::sqrt(std::pow(dx, 2) + std::pow(dy, 2));
+    
+    return std::atan(rise / run) * (180 / M_PI);
+}
 
 /**
  *  @brief  Program execution begins here
@@ -51,8 +60,8 @@ using gcs::point;
 int main(int argc, const char *argv[]) {
     // Create vec3D using a single point3D (extends from origin)
     // or provide two point3D - the start and end points.
-    // vec3D v3d_0{point3D{3, 2, 1}};
-    // vec3D v3d_0{point3D{0, 0, 0}, point3D{3, 2, 1}};
+    vec3D v3d_0{point3D{3, 2, 1}};
+    //vec3D v3d_0{point3D{0, 0, 0}, point3D{3, 2, 1}};
 
     // Create vec3D using endpoint coordinates (extends from origin)
     // or provide two sets of three doubles - the start and end points
@@ -64,7 +73,7 @@ int main(int argc, const char *argv[]) {
     // vec3D v3d_0{{3, 2, 1}};
     // vec3D v3d_0{{0, 0, 0}, {3, 2, 1}};
     
-    vec3D v3d_0{3, 2, 1};
+    //vec3D v3d_0{3, 2, 1};
     vec3D v3d_1{-1, 1, 1};
 
     std::cout << v3d_0 << "\n" << v3d_1 << std::endl;
@@ -83,19 +92,6 @@ int main(int argc, const char *argv[]) {
     vec3D v3d_3{{6, 6, 6}};
 
     std::cout << v3d_2 << "\n" << v3d_3 << std::endl;
-    
-    point<2> a({0, 0});
-    point<2> b({4, 3});
-    b.set_x(2);
-    point<2> c;
-    
-    c = b;
-    if (c == b) {
-        std::cout << "same" << std::endl;
-    }
-    std::cout << "distance of x and y: " << point<2>::distance(point<2>{{0, 0}}, point<2>{{3, 4}}) << std::endl;
-    std::cout << "distance of a and b: " << point<2>::distance(a, b) << std::endl;
-    std::cout << "distance of u and v: " << point<2>::distance({0, 0}, {3, 4}) << std::endl;
-    
-    return EXIT_SUCCESS;
+     
+    return 0;
 }

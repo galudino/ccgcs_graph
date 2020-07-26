@@ -192,7 +192,7 @@ void point<2, FloatType>::set_y(FloatType y) {
 
 template <typename FloatType>
 void point<2, FloatType>::set(const Point &p) {
-    return *this;
+    m_coords = p.m_coords;
 }
 
 template <typename FloatType>
@@ -237,8 +237,8 @@ bool point<2, FloatType>::operator!=(const Point &p) {
     return !(*(this) == p);
 }
 
-template <typename FloatType>
-std::ostream &operator<<(std::ostream &os, const point<2, FloatType> &p) {
+template <typename floating_precision>
+std::ostream &operator<<(std::ostream &os, const point<2, floating_precision> &p) {
     auto it = p.m_coords.begin();
 
     os << "{ ";
@@ -375,8 +375,8 @@ bool point<3, FloatType>::operator!=(const Point &p) {
     return !(*(this) == p);
 }
 
-template <typename FloatType>
-std::ostream &operator<<(std::ostream &os, const point<3, FloatType> &p) {
+template <typename floating_precision>
+std::ostream &operator<<(std::ostream &os, const point<3, floating_precision> &p) {
     auto it = p.m_coords.begin();
 
     os << "{ ";
