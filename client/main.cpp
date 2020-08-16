@@ -43,6 +43,8 @@
     \return     0 on success, else failure (see error code)
  */
 int main(int argc, const char *argv[]) {
-
+    gcs::point2D p {3, 5};
+    p.set(std::array<double, 2> {22, 34});
+    
     return EXIT_SUCCESS;
 }

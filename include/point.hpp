@@ -50,17 +50,16 @@ class point3D;
 class gcs::point2D {
 public:
     point2D();
-
     point2D(double x, double y);
-    point2D(std::array<double, 2> &arr);
-
+    point2D(const std::array<double, 2> &arr);
+    point2D(const std::array<double, 2> &&arr);
     point2D(const point2D &p);
+    point2D(const point2D &&p);
 
     ~point2D();
 
     double x() const;
     double y() const;
-
     std::array<double, 2> get() const;
 
     void set_x(double x);
@@ -68,8 +67,10 @@ public:
 
     void set(double x, double y);
     void set(const point2D &p);
-    void set(std::array<double, 2> &arr);
-
+    void set(const point2D &&p);
+    void set(const std::array<double, 2> &arr);
+    void set(const std::array<double, 2> &&arr);
+    
     void reset();
 
     point2D &operator=(const point2D &p);
@@ -97,29 +98,30 @@ private:
 class gcs::point3D {
 public:
     point3D();
-
     point3D(double x, double y, double z);
-    point3D(std::array<double, 3> &arr);
-
+    point3D(const std::array<double, 3> &arr);
+    point3D(const std::array<double, 3> &&arr);
     point3D(const point3D &p);
+    point3D(const point3D &&p);
     point3D(const point2D &p);
+    point3D(const point2D &&p);
 
     ~point3D();
 
     double x() const;
     double y() const;
     double z() const;
-
     std::array<double, 3> get() const;
 
     void set_x(double x);
     void set_y(double y);
     void set_z(double z);
-
     void set(double x, double y, double z);
     void set(const point3D &p);
-    void set(std::array<double, 3> &arr);
-
+    void set(const point3D &&p);
+    void set(const std::array<double, 3> &arr);
+    void set(const std::array<double, 3> &&arr);
+    
     void reset();
 
     point3D &operator=(const point3D &p);

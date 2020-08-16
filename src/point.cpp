@@ -57,6 +57,22 @@ point2D::point2D(double x, double y) : m_x{x}, m_y{y} {
 /*!
     \brief
 
+    \param[in]  arr
+*/
+point2D::point2D(const std::array<double, 2> &arr) : m_x{arr[0]}, m_y{arr[1]} {
+}
+
+/*!
+    \brief
+
+    \param[in]  arr
+*/
+point2D::point2D(const std::array<double, 2> &&arr) : m_x{arr[0]}, m_y{arr[1]} {
+}
+
+/*!
+    \brief
+
     \param[in]  p
  */
 point2D::point2D(const point2D &p) : m_x{p.m_x}, m_y{p.m_y} {
@@ -65,9 +81,9 @@ point2D::point2D(const point2D &p) : m_x{p.m_x}, m_y{p.m_y} {
 /*!
     \brief
 
-    \param[in]  arr
-*/
-point2D::point2D(std::array<double, 2> &arr) : m_x{arr[0]}, m_y{arr[1]} {
+    \param[in]  p
+ */
+point2D::point2D(const point2D &&p) : m_x{p.m_x}, m_y{p.m_y} {
 }
 
 /*!
@@ -145,9 +161,29 @@ void point2D::set(const point2D &p) {
 /*!
     \brief
 
+    \param[in]  p
+*/
+void point2D::set(const point2D &&p) {
+    m_x = p.m_x;
+    m_y = p.m_y;
+}
+
+/*!
+    \brief
+
     \param[in]  arr
 */
-void point2D::set(std::array<double, 2> &arr) {
+void point2D::set(const std::array<double, 2> &arr) {
+    m_x = arr[0];
+    m_y = arr[1];
+}
+
+/*!
+    \brief
+
+    \param[in]  arr
+*/
+void point2D::set(const std::array<double, 2> &&arr) {
     m_x = arr[0];
     m_y = arr[1];
 }
@@ -288,7 +324,16 @@ point3D::point3D(double x, double y, double z) : m_2d{x, y}, m_z{z} {
 
     \param[in]  arr
 */
-point3D::point3D(std::array<double, 3> &arr)
+point3D::point3D(const std::array<double, 3> &arr)
+    : m_2d{arr[0], arr[1]}, m_z{arr[2]} {
+}
+
+/*!
+    \brief
+
+    \param[in]  arr
+*/
+point3D::point3D(const std::array<double, 3> &&arr)
     : m_2d{arr[0], arr[1]}, m_z{arr[2]} {
 }
 
@@ -305,7 +350,23 @@ point3D::point3D(const point3D &p) : m_2d{p.m_2d[0], p.m_2d[1]}, m_z{p.m_z} {
 
     \param[in]  p
 */
+point3D::point3D(const point3D &&p) : m_2d{p.m_2d[0], p.m_2d[1]}, m_z{p.m_z} {
+}
+
+/*!
+    \brief
+
+    \param[in]  p
+*/
 point3D::point3D(const point2D &p) : m_2d{p}, m_z{0.0} {
+}
+
+/*!
+    \brief
+
+    \param[in]  p
+*/
+point3D::point3D(const point2D &&p) : m_2d{p}, m_z{0.0} {
 }
 
 /*!
@@ -404,9 +465,31 @@ void point3D::set(const point3D &p) {
 /*!
     \brief
 
+    \param[in]  p
+*/
+void point3D::set(const point3D &&p) {
+    m_2d[0] = p.m_2d[0];
+    m_2d[1] = p.m_2d[1];
+    m_z = p.m_z;
+}
+
+/*!
+    \brief
+
     \param[in]  arr
 */
-void point3D::set(std::array<double, 3> &arr) {
+void point3D::set(const std::array<double, 3> &arr) {
+    m_2d[0] = arr[0];
+    m_2d[1] = arr[1];
+    m_z = arr[2];
+}
+
+/*!
+    \brief
+
+    \param[in]  arr
+*/
+void point3D::set(const std::array<double, 3> &&arr) {
     m_2d[0] = arr[0];
     m_2d[1] = arr[1];
     m_z = arr[2];
