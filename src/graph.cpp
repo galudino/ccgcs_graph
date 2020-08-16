@@ -29,5 +29,3 @@
  */
 
 #include "graph.hpp"
-
-

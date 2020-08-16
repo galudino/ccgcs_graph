@@ -29,5 +29,3 @@
  */
 
 #include "node.hpp"
-
-
