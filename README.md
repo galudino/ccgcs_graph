@@ -6,9 +6,18 @@ The goal of this repository is to further my understanding of graphs,<br>
 and to practice C++ in general.<br>
 (in particular, using <b>templates</b> and <b>smart pointers</b>)
 
-I want to have the following abstractions:<br><br>
-<code>position</code>
-- stores euclidean coordinates x, y, z
+The following abstractions are planned:<br><br>
+<code>point</code>
+- <code>class gcs::point</code> takes two <code>template</code> parameters: <code>size_t N</code> and <code>typename F</code>.
+- <code>size_t N</code> is the <b>dimension size</b>, i.e. <code>N = 2</code> is <b>2D space</b>.
+- <code>typename F</code> is the <b>floating-point</b> precision; <code>double</code> is the default.
+- Will be used to store the position of a <code>node</code>.
+
+<code>vec</code>
+- <code> class gcs::vec</code> takes two <code>template</code> parameters: <code>size_t N</code> and <code>typename F</code>.
+- <code>size_t N</code> is the <b>dimension size</b>, i.e. <code>N = 2</code> is <b>2D space</b>.
+- <code>typename F</code> is the <b>floating-point</b> precision; <code>double</code> is the default.
+- Will be used to determine the trajectory of <code>edges</code>.
 
 <code>edge<edge_type></code>
 - stores a weight/cost (a floating point value) 
@@ -47,7 +56,7 @@ A <code>CMakeLists.txt</code> file is provided for use with the <b>CMake</b> bui
 
 You can use <b>CMake</b> to produce Microsoft Visual Studio <code>.sln</code> files,<br>or Unix <code>Makefiles</code> for macOS or Linux.
 
-<h2>Creating a .tar.gz archive (tarball)</h2>
+<h3>Creating a .tar.gz archive (tarball)</h3>
 You can make an archive (tarball) of your local copy of this repository<br>
 by typing <code>./maketarball your_chosen_name.tar.gz</code>,<br> 
 where 'your_chosen_name' is...a name of your choice.<br><br>
@@ -58,12 +67,10 @@ Example:<br>
 <code>./maketarball gcs_graph.tar.gz</code>
 
 <h2> Current state </h2>
-- point.hpp has a template <size_t N, typename F = double> class gcs::point
-- vec.hpp has a template <size_t N, typename F = double> class gcs::vec
-- point.hpp, vec.hpp may be used outside of this project (gcs_utils.hpp required)
-- All member functions need to be documented
+- <code>gcs::point</code> (<b>point abstraction</b>) and <code>gcs::vec</code> (<b>vector abstraction</b>) completed.<br>
+- <code>point.hpp</code>, <code>vec.hpp</code>, <code>vec_impl.hpp</code>, and <code>gcs_utils.hpp</code> may be taken out of this codebase and used for other projects. It's possible that <b><code>gcs_graph</code></b> may just be one of many modules I write for the entire <code><b>gcs</b></code> library.<br>
 
-Still TODO:
-- node.hpp, edge.hpp, graph.hpp, possibly another abstraction for paths
-- Exhaustive unit tests
-- Test on macOS, Windows 10, and Linux (Ubuntu)
+<h3> Still TODO: </h3>
+- <code>node.hpp</code>, <code>edge.hpp</code>, <code>graph.hpp</code>, possibly another abstraction for paths<br>
+- Exhaustive unit tests<br>
+- Test on macOS, Windows 10, and Linux (Ubuntu)<br>
