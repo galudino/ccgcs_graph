@@ -30,21 +30,60 @@
  */
 
 #include <cmath>
+#include <iostream>
 
-#include "header.hpp"
+#include "gcs_utils.hpp"
+#include "point.hpp"
 #include "vec.hpp"
 
 /*!
     \brief  Program execution begins and ends here
-    
+
     \param[in]  argc    Command line argument count
     \param[in]  argv    Command line arguments
- 
+
     \return     0 on success, else failure (see error code)
  */
 int main(int argc, const char *argv[]) {
-    gcs::point2D p {3, 5};
-    p.set(std::array<double, 2> {22, 34});
-    
+    using gcs::point;
+    using gcs::vec;
+
+    // unit vector i in R2
+    vec<2> i{1, 0};
+    i.print_details(std::cout);
+
+    // vector for a 3, 4, 5 triangle
+    vec<2> v{3, 4};
+    v.print_details(std::cout);
+
+    std::cout << "angle between " << i << " and " << v << ": "
+              << gcs::deg(v.angle(i)) << "°\n"
+              << std::endl;
+
+    // variable p_origin will initialize to {0, 0}
+    point<2> p_origin;
+
+    // setting point p_origin to position {1, 2}
+    p_origin.set({1, 2});
+
+    // determining end point
+    // from start position {1, 2},
+    // with direction {3, 4}
+    auto p_end = vec<2>::endpoint(p_origin, v);
+    std::cout << "endpoint from " << p_origin << " with direction " << v << ": "
+              << p_end << std::endl;
+
+    // determining start position
+    // from terminal position {4, 7},
+    // with vector components {3, 4}
+    auto p_beg = vec<2>::srcpoint(p_end, {3, 4}); // initializer_list for vec
+    std::cout << "startpoint from " << p_end << " with direction " << v << ": "
+              << p_beg << std::endl;
+
+    // vectors can be created using two points (start and end points);
+    // these points are initializer lists --
+    // but gcs::point instances can be used too.
+    vec<2>({0, 0}, {6, 8}).print_details(std::cout);
+
     return EXIT_SUCCESS;
 }

@@ -1,6 +1,7 @@
 /*!
-    \file       header.hpp
-    \brief      Header file
+    \file       gcs_utils.hpp
+    \brief      Header file for utilities (constants, miscellaneous functions,
+   etc.)
 
     \author     Gemuele Aludino
     \date       15 Aug 2020
@@ -29,33 +30,40 @@
     THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef HEADER_HPP
-#define HEADER_HPP
+#ifndef GCS_UTILS_HPP
+#define GCS_UTILS_HPP
 
-// For use with .tpp files only
+#include <cmath>
+#include <cstddef>
+
+// For use with template implementation files
 #define BEGIN_GCS_NAMESPACE namespace gcs {
 #define END_GCS_NAMESPACE } // namespace gcs
 
 namespace gcs {
-const double epsilon = 0.00000001f;
+constexpr const double epsilon = 0.00000001f;
 
-bool double_approx_eq(double a, double b);
+template <typename F = double>
+bool approx_eq(F a, F b);
 
-double to_degrees(double radians);
-double to_radians(double degrees);
+template <typename F = double>
+F deg(F radians);
 
-template <size_t dimension, typename float_precision = double>
-float_precision euclidean_distance(float_precision u[], float_precision v[]);
+template <typename F = double>
+F rad(F degrees);
 
-template <size_t dimension, typename float_precision = double>
-float_precision dot_product(float_precision U[], float_precision V[]);
+template <size_t N, typename F = double>
+F euclidean_distance(F u[], F v[]);
+
+template <size_t N, typename F = double>
+F dot_product(F U[], F V[]);
 } // namespace gcs
 
 /*!
     \brief      Retrieves the distance between two points, u and v
 
-    @tparam     dimension               minimum number of coordinates to denote a point
-    @tparam     float_precision  floating-point value type, i.e. float or double
+    @tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+    @tparam F   Floating-point precision, default is double.
 
     \param[in]  u    array of first point's cooridnates (start point), size is
    dimension
@@ -64,13 +72,12 @@ float_precision dot_product(float_precision U[], float_precision V[]);
 
     \return     Euclidean distance between two points, u and v
  */
-template <size_t dimension, typename float_precision>
-float_precision gcs::euclidean_distance(float_precision u[],
-                                        float_precision v[]) {
-    double sum = 0;
+template <size_t N, typename F>
+F gcs::euclidean_distance(F u[], F v[]) {
+    F sum = 0;
 
-    for (size_t i = 0; i < dimension; i++) {
-        double difference = v[i] - u[i];
+    for (size_t i = 0; i < N; i++) {
+        F difference = v[i] - u[i];
         sum += std::pow(difference, 2.0);
     }
 
@@ -80,23 +87,66 @@ float_precision gcs::euclidean_distance(float_precision u[],
 /*!
     \brief
 
-    @tparam     dimension                  minimum number of coordinates to denote a point
-    @tparam     float_precision     floating-point value type, i.e. float or double
+    @tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+    @tparam F   Floating-point precision, default is double.
 
     \param[in]  U   array of first vector's components, size is dimension
     \param[in]  V   array of second vector's components, size is dimension
 
     \return     dot product of vectors U and V
  */
-template <size_t dimension, typename float_precision>
-float_precision gcs::dot_product(float_precision U[], float_precision V[]) {
-    double sum = 0;
+template <size_t N, typename F>
+F gcs::dot_product(F U[], F V[]) {
+    F sum = 0;
 
-    for (size_t i = 0; i < dimension; i++) {
+    for (size_t i = 0; i < N; i++) {
         sum += U[i] * V[i];
     }
 
     return sum;
 }
 
-#endif /* HEADER_HPP */
+/*!
+    \brief
+
+    @tparam F   Floating-point precision, default is double.
+
+    \param[in]  a
+    \param[in]  b
+
+    \return
+ */
+template <typename F>
+bool gcs::approx_eq(F a, F b) {
+    return std::abs(a - b) < gcs::epsilon;
+}
+
+/*!
+    \brief
+
+    @tparam F   Floating-point precision, default is double.
+
+    \param[in]  radians
+
+    \return
+ */
+template <typename F>
+F gcs::deg(F radians) {
+    return radians * (180.0 / M_PI);
+}
+
+/*!
+    \brief
+
+    @tparam F   Floating-point precision, default is double.
+
+    \param[in]  degrees
+
+    \return
+ */
+template <typename F>
+F gcs::rad(F degrees) {
+    return degrees * (M_PI / 180.0);
+}
+
+#endif /* GCS_UTILS_HPP */

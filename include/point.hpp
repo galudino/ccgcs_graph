@@ -32,158 +32,338 @@
 #ifndef POINT_HPP
 #define POINT_HPP
 
-#include <algorithm>
 #include <array>
-#include <iostream>
-
-#include "header.hpp"
+#include <ostream>
 
 namespace gcs {
-class point2D;
-class point3D;
+template <size_t N, typename F = double>
+class point;
 } // namespace gcs
 
 /*!
-    \class      gcs::point2D
-    \brief      An abstraction for a two-dimensional Cartesian coordinate
+    \class  gcs::point
+    \brief  Templated abstraction for a point on the Cartesian coordinate plane
+
+    @tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+    @tparam F   Floating-point precision, default is double.
  */
-class gcs::point2D {
+template <size_t N, typename F>
+class gcs::point {
 public:
-    point2D();
-    point2D(double x, double y);
-    point2D(const std::array<double, 2> &arr);
-    point2D(const std::array<double, 2> &&arr);
-    point2D(const point2D &p);
-    point2D(const point2D &&p);
+    using iterator = typename std::array<F, N>::iterator;
+    using const_iterator = typename std::array<F, N>::const_iterator;
 
-    ~point2D();
+    using reverse_iterator = typename std::array<F, N>::reverse_iterator;
 
-    double x() const;
-    double y() const;
-    std::array<double, 2> get() const;
+    using const_reverse_iterator =
+        typename std::array<F, N>::const_reverse_iterator;
 
-    void set_x(double x);
-    void set_y(double y);
+    /*!
+        \brief
+     */
+    point() {
+        reset();
+    }
 
-    void set(double x, double y);
-    void set(const point2D &p);
-    void set(const point2D &&p);
-    void set(const std::array<double, 2> &arr);
-    void set(const std::array<double, 2> &&arr);
-    
-    void reset();
+    /*!
+        \brief
 
-    point2D &operator=(const point2D &p);
-    double &operator[](int index) const;
+        \param[in]  coords
+    */
+    point(const std::initializer_list<F> &coords) {
+        std::copy(coords.begin(), coords.begin() + N, m_coords.begin());
+    }
 
-    bool operator==(const point2D &p);
-    bool operator!=(const point2D &p);
+    /*!
+        \brief
 
-    friend std::ostream &operator<<(std::ostream &os, const point2D &p);
+        \param[in]  p
+    */
+    point(const point &p) : m_coords(p.m_coords) {
+    }
 
-    static double distance(double u_x, double u_y, double v_x, double v_y);
-    static double distance(const point2D &u, const point2D &v);
-    static double distance(std::array<double, 2> &arr_u,
-                           std::array<double, 2> &arr_v);
+    /*!
+        \brief
+
+        \param[in]  p
+    */
+    point(const point &&p) : m_coords(p.m_coords) {
+    }
+
+    /*!
+        \brief
+    */
+    ~point() {
+    }
+
+    /*!
+        \brief
+        \return
+     */
+    iterator begin() {
+        return m_coords.begin();
+    }
+
+    /*!
+        \brief
+        \return
+     */
+    iterator end() {
+        return m_coords.end();
+    }
+
+    /*!
+        \brief
+        \return
+     */
+    const_iterator cbegin() const {
+        return m_coords.cbegin();
+    }
+
+    /*!
+        \brief
+        \return
+     */
+    const_iterator cend() const {
+        return m_coords.cend();
+    }
+
+    /*!
+        \brief
+        \return
+     */
+    reverse_iterator rbegin() {
+        return m_coords.rbegin();
+    }
+
+    /*!
+        \brief
+        \return
+     */
+    reverse_iterator rend() {
+        return m_coords.rend();
+    }
+
+    /*!
+        \brief
+        \return
+     */
+    const_reverse_iterator crbegin() const {
+        return m_coords.crbegin();
+    }
+
+    /*!
+        \brief
+        \return
+     */
+    const_reverse_iterator crend() const {
+        return m_coords.crend();
+    }
+
+    /*!
+        \brief
+        \return
+     */
+    std::array<F, N> get() const {
+        return m_coords;
+    }
+
+    /*!
+        \brief
+
+        \param[in]  coords
+    */
+    void set(const std::initializer_list<F> &coords) {
+        std::copy(coords.begin(), coords.begin() + N, begin());
+    }
+
+    /*!
+        \brief
+
+        \param[in]  p
+    */
+    void set(const point &p) {
+        std::copy(p.begin(), p.end(), begin());
+    }
+
+    /*!
+        \brief
+
+        \param[in]  p
+    */
+    void set(const point &&p) {
+        std::copy(p.begin(), p.end(), begin());
+    }
+
+    /*!
+        \brief
+     */
+    void reset() {
+        m_coords.fill(0);
+    }
+
+    /*!
+        \brief
+
+        \param[in]  coords
+
+        \return
+    */
+    point &operator=(const std::initializer_list<F> &coords) {
+        set(coords);
+        return *this;
+    }
+
+    /*!
+        \brief
+
+        \param[in]  p
+
+        \return
+    */
+    point &operator=(const point &p) {
+        set(p);
+        return *this;
+    }
+
+    /*!
+        \brief
+
+        \param[in]  p
+
+        \return
+    */
+    point &operator=(const point &&p) {
+        set(p);
+        return *this;
+    }
+
+    /*!
+        \brief
+        \return
+     */
+    F &operator[](const int index) {
+        return m_coords[index];
+    }
+
+    /*!
+        \brief
+
+        \param[in]  p
+
+        \return
+    */
+    bool operator==(const point &p) {
+        return m_coords == p.m_coords;
+    }
+
+    /*!
+        \brief
+
+        \param[in]  p
+
+        \return
+    */
+    bool operator==(const point &p) const {
+        return m_coords == p.m_coords;
+    }
+
+    /*!
+        \brief
+
+        \param[in]  p
+
+        \return
+    */
+    bool operator!=(const point &p) {
+        return !(*(this) == p);
+    }
+
+    /*!
+        \brief
+
+        \param[in]  p
+
+        \return
+    */
+    bool operator!=(const point &p) const {
+        return !(*(this) == p);
+    }
+
+    /*!
+        \brief
+
+        \param[in]  coords
+
+        \return
+    */
+    F distance(const std::initializer_list<F> &coords) const {
+        return euclidean_distance<N, F>(cbegin(), coords.cbegin());
+    }
+
+    /*!
+        \brief
+
+        \param[in]  p
+
+        \return
+    */
+    F distance(const point &p) const {
+        return euclidean_distance<N, F>(cbegin(), p.cbegin());
+    }
+
+    /*!
+        \brief
+
+        \param[in]  p
+
+        \return
+    */
+    F distance(const point &&p) const {
+        return euclidean_distance<N, F>(cbegin(), p.cbegin());
+    }
+
+    /*!
+        \brief
+
+        \param[in]  os
+    */
+    void print_details(std::ostream &os) const {
+        os << "==============================="
+           << "\n"
+           << *this << "\t\t" << this << "\n"
+           << "===============================" << std::endl;
+    }
+
+    /*!
+        \brief
+
+        \param[out] os
+        \param[in]  p
+
+        \return
+     */
+    friend std::ostream &operator<<(std::ostream &os, const point &p) {
+        auto it = p.cbegin();
+        auto it_end = p.cend();
+
+        os << "{";
+        while (it < it_end) {
+            os << *(it);
+
+            if (it < it_end - 1) {
+                os << ", ";
+            }
+
+            ++it;
+        }
+        os << "}";
+
+        return os;
+    }
 
 private:
-    double m_x; ///< x-coordinate
-    double m_y; ///< y-coordinate
-};
-
-/*!
-    \class      gcs::point3D
-    \brief      An abstraction for a three-dimensional Cartesian coordinate
- */
-class gcs::point3D {
-public:
-    point3D();
-    point3D(double x, double y, double z);
-    point3D(const std::array<double, 3> &arr);
-    point3D(const std::array<double, 3> &&arr);
-    point3D(const point3D &p);
-    point3D(const point3D &&p);
-    point3D(const point2D &p);
-    point3D(const point2D &&p);
-
-    ~point3D();
-
-    double x() const;
-    double y() const;
-    double z() const;
-    std::array<double, 3> get() const;
-
-    void set_x(double x);
-    void set_y(double y);
-    void set_z(double z);
-    void set(double x, double y, double z);
-    void set(const point3D &p);
-    void set(const point3D &&p);
-    void set(const std::array<double, 3> &arr);
-    void set(const std::array<double, 3> &&arr);
-    
-    void reset();
-
-    point3D &operator=(const point3D &p);
-    double &operator[](int index) const;
-
-    bool operator==(const point3D &p);
-    bool operator!=(const point3D &p);
-
-    friend std::ostream &operator<<(std::ostream &os, const point3D &p);
-
-    static double distance(double u_x, double u_y, double u_z, double v_x,
-                           double v_y, double v_z);
-    static double distance(const point3D &u, const point3D &v);
-    static double distance(std::array<double, 3> &arr_u,
-                           std::array<double, 3> &arr_v);
-
-private:
-    gcs::point2D m_2d; ///< 2D portion of a 3D point, x and y coordinates
-    double m_z;        ///< z-coordinate
-};
-
-namespace gcs {
-class vector2;
-}
-
-class gcs::vector2 {
-public:
-    vector2();
-    vector2(double vx, double vy);
-
-    ~vector2();
-
-    double vx() const;
-    double vy() const;
-    std::array<double, 2> get() const;
-
-    void set_vx(double vx);
-    void set_vy(double vy);
-    void set(std::array<double, 2> &arr);
-
-    void reset();
-
-    vector2 &operator=(const vector2 &v);
-    double &operator[](int component);
-
-    bool operator==(const vector2 &v);
-    bool operator!=(const vector2 &v);
-
-    vector2 operator+(const vector2 &v);
-    vector2 operator-(const vector2 &v);
-    vector2 operator*(const vector2 &v);
-
-    double magnitude() const;
-    double angle_x() const;
-    double angle_y() const;
-    double angle(const vector2 &v) const;
-
-    friend std::ostream &operator<<(std::ostream &os, const vector2 &v);
-
-private:
-    double m_vx; ///< x-component of 2D vector
-    double m_vy; ///< y-component of 2D vector
+    std::array<F, N> m_coords; ///< Point coordinates stored here.
 };
 
 #endif /* POINT_HPP */

@@ -1,7 +1,9 @@
 /*!
-    \file       vec.cpp
-    \brief      Source file for a vector (trajectory) ADT
+    \file       vec.tpp
+    \brief      Template implementation file for vec.hpp
 
+    \details    This header file is private and should not be included by any other file.
+ 
     \author     Gemuele Aludino
     \date       15 Aug 2020
     \copyright  Copyright (c) 2020 Gemuele Aludino
@@ -34,8 +36,7 @@
 
 #include <memory>
 
-#include "header.hpp"
-#include "vec.hpp"
+namespace gcs {
 
 using gcs::point2D;
 using gcs::vec2D;
@@ -55,6 +56,7 @@ double calculate_slope(const std::array<double, 3> &point_a,
 /*!
     \brief
  */
+template <typename F>
 vec2D::vec2D() : m_a{}, m_b{} {
 }
 
@@ -63,6 +65,7 @@ vec2D::vec2D() : m_a{}, m_b{} {
 
     \param[in]  b
  */
+template <typename F>
 vec2D::vec2D(const point2D &b) : m_a{}, m_b{b} {
 }
 
@@ -72,6 +75,7 @@ vec2D::vec2D(const point2D &b) : m_a{}, m_b{b} {
     \param[in]  a
     \param[in]  b
  */
+template <typename F>
 vec2D::vec2D(const point2D &a, const point2D &b) : m_a{a}, m_b{b} {
 }
 
@@ -80,6 +84,7 @@ vec2D::vec2D(const point2D &a, const point2D &b) : m_a{a}, m_b{b} {
 
     \param[in]  arr_b
  */
+template <typename F>
 vec2D::vec2D(std::array<double, 2> &arr_b) : m_a{}, m_b{arr_b} {
 }
 
@@ -89,6 +94,7 @@ vec2D::vec2D(std::array<double, 2> &arr_b) : m_a{}, m_b{arr_b} {
     \param[in]  arr_a
     \param[in]  arr_b
  */
+template <typename F>
 vec2D::vec2D(std::array<double, 2> &arr_a, std::array<double, 2> &arr_b)
     : m_a{arr_a}, m_b{arr_b} {
 }
@@ -99,6 +105,7 @@ vec2D::vec2D(std::array<double, 2> &arr_a, std::array<double, 2> &arr_b)
     \param[in]  b_x
     \param[in]  b_y
  */
+template <typename F>
 vec2D::vec2D(double b_x, double b_y) : m_a{}, m_b{b_x, b_y} {
 }
 
@@ -110,6 +117,7 @@ vec2D::vec2D(double b_x, double b_y) : m_a{}, m_b{b_x, b_y} {
     \param[in]  b_x
     \param[in]  b_y
  */
+template <typename F>
 vec2D::vec2D(double a_x, double a_y, double b_x, double b_y)
     : m_a{a_x, a_y}, m_b{b_x, b_y} {
 }
@@ -119,12 +127,14 @@ vec2D::vec2D(double a_x, double a_y, double b_x, double b_y)
 
     \param[in]  v
  */
+template <typename F>
 vec2D::vec2D(const vec2D &v) : m_a{v.m_a}, m_b{v.m_b} {
 }
 
 /*!
     \brief
  */
+template <typename F>
 vec2D::~vec2D() {
 }
 
@@ -133,6 +143,7 @@ vec2D::~vec2D() {
 
     \return
  */
+template <typename F>
 point2D vec2D::a() const {
     return m_a;
 }
@@ -142,6 +153,7 @@ point2D vec2D::a() const {
 
     \return
  */
+template <typename F>
 point2D vec2D::b() const {
     return m_b;
 }
@@ -151,6 +163,7 @@ point2D vec2D::b() const {
 
     \return
  */
+template <typename F>
 std::array<point2D, 2> vec2D::get() const {
     return std::array<point2D, 2>{m_a, m_b};
 }
@@ -160,6 +173,7 @@ std::array<point2D, 2> vec2D::get() const {
 
     \param[in]  a
  */
+template <typename F>
 void vec2D::set_a(const point2D &a) {
     m_a = a;
 }
@@ -169,6 +183,7 @@ void vec2D::set_a(const point2D &a) {
 
     \param[in]  b
  */
+template <typename F>
 void vec2D::set_b(const point2D &b) {
     m_b = b;
 }
@@ -179,6 +194,7 @@ void vec2D::set_b(const point2D &b) {
     \param[in]  a_x
     \param[in]  a_y
  */
+template <typename F>
 void vec2D::set_a(double a_x, double a_y) {
     m_a = point2D{a_x, a_y};
 }
@@ -189,6 +205,7 @@ void vec2D::set_a(double a_x, double a_y) {
     \param[in]  b_x
     \param[in]  b_y
  */
+template <typename F>
 void vec2D::set_b(double b_x, double b_y) {
     m_b = point2D{b_x, b_y};
 }
@@ -198,6 +215,7 @@ void vec2D::set_b(double b_x, double b_y) {
 
     \param[in]  a
  */
+template <typename F>
 void vec2D::set_a(std::array<double, 2> &a) {
     m_a = point2D{a};
 }
@@ -207,6 +225,7 @@ void vec2D::set_a(std::array<double, 2> &a) {
 
     \param[in]  b
 */
+template <typename F>
 void vec2D::set_b(std::array<double, 2> &b) {
     m_a = point2D{b};
 }
@@ -217,6 +236,7 @@ void vec2D::set_b(std::array<double, 2> &b) {
     \param[in]  a
     \param[in]  b
 */
+template <typename F>
 void vec2D::set(const point2D &a, const point2D &b) {
     m_a = point2D{a};
     m_b = point2D{b};
@@ -230,6 +250,7 @@ void vec2D::set(const point2D &a, const point2D &b) {
     \param[in]  b_x
     \param[in]  b_y
 */
+template <typename F>
 void vec2D::set(double a_x, double a_y, double b_x, double b_y) {
     m_a = point2D{a_x, a_y};
     m_b = point2D{b_x, b_y};
@@ -241,6 +262,7 @@ void vec2D::set(double a_x, double a_y, double b_x, double b_y) {
     \param[in]  a
     \param[in]  b
 */
+template <typename F>
 void vec2D::set(std::array<double, 2> &a, std::array<double, 2> &b) {
     m_a = point2D{a};
     m_b = point2D{b};
@@ -249,6 +271,7 @@ void vec2D::set(std::array<double, 2> &a, std::array<double, 2> &b) {
 /*!
     \brief
 */
+template <typename F>
 void vec2D::reset() {
     m_b = m_a;
 }
@@ -260,6 +283,7 @@ void vec2D::reset() {
 
     \return
 */
+template <typename F>
 vec2D &vec2D::operator=(const vec2D &v) {
     m_a = point2D{v.m_a};
     m_b = point2D{v.m_b};
@@ -274,6 +298,7 @@ vec2D &vec2D::operator=(const vec2D &v) {
 
     \return
 */
+template <typename F>
 point2D &vec2D::operator[](int index) {
     switch (index) {
     case 0:
@@ -296,6 +321,7 @@ point2D &vec2D::operator[](int index) {
 
     \return
 */
+template <typename F>
 bool vec2D::operator==(const vec2D &v) {
     return m_a == v.m_a && m_b == v.m_b;
 }
@@ -307,6 +333,7 @@ bool vec2D::operator==(const vec2D &v) {
 
     \return
 */
+template <typename F>
 bool vec2D::operator!=(const vec2D &v) {
     return !(*(this) == v);
 }
@@ -318,6 +345,7 @@ bool vec2D::operator!=(const vec2D &v) {
 
     \return
 */
+template <typename F>
 vec2D vec2D::operator+(const vec2D &v) {
     return vec2D{dx() + v.dx(), dy() + v.dy()};
 }
@@ -329,6 +357,7 @@ vec2D vec2D::operator+(const vec2D &v) {
 
     \return
 */
+template <typename F>
 vec2D vec2D::operator-(const vec2D &v) {
     return vec2D{dx() - v.dx(), dy() - v.dy()};
 }
@@ -341,6 +370,7 @@ vec2D vec2D::operator-(const vec2D &v) {
 
     \return
 */
+template <typename F>
 std::ostream &gcs::operator<<(std::ostream &os, const vec2D &v) {
     os << "------------------------------------------------" << std::endl
        << "address        \t(" << &v << ")\t\tvec2D" << std::endl
@@ -361,6 +391,7 @@ std::ostream &gcs::operator<<(std::ostream &os, const vec2D &v) {
 
     \return
 */
+template <typename F>
 double vec2D::magnitude() const {
     return point2D::distance(m_a, m_b);
 }
@@ -370,6 +401,7 @@ double vec2D::magnitude() const {
 
     \return
 */
+template <typename F>
 double vec2D::angle() const {
     return gcs::to_degrees(std::atan(dy() / dx()));
 }
@@ -381,6 +413,7 @@ double vec2D::angle() const {
 
     \return
 */
+template <typename F>
 double vec2D::angle(const vec2D &v) const {
     double adjacent = dot_product(*this, v);
     double hypotenuse = magnitude() * v.magnitude();
@@ -888,4 +921,6 @@ vec3D vec3D::cross_product(const vec3D &u, const vec3D &v) {
     double z = (a[0] * b[1]) - (a[1] * b[0]);
 
     return vec3D{x, y, z};
+}
+
 }

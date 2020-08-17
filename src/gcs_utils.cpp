@@ -1,6 +1,7 @@
 /*!
-    \file       source.cpp
-    \brief      Source file
+    \file       gcs_utils.cpp
+    \brief      Source file for utilities (constants, miscellaneous functions,
+   etc.)
 
     \author     Gemuele Aludino
     \date       15 Aug 2020
@@ -29,41 +30,4 @@
     THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#define _USE_MATH_DEFINES
-#include <cmath>
-
-#include "header.hpp"
-
-/*!
-    \brief
-
-    \param[in]  a
-    \param[in]  b
-
-    \return
- */
-bool gcs::double_approx_eq(double a, double b) {
-    return std::abs(a - b) < gcs::epsilon;
-}
-
-/*!
-    \brief
-
-    \param[in]  radians
-
-    \return
- */
-double gcs::to_degrees(double radians) {
-    return radians * (180.0f / M_PI);
-}
-
-/*!
-    \brief
-
-    \param[in]  degrees
-
-    \return
- */
-double gcs::to_radians(double degrees) {
-    return degrees * (M_PI / 180.0f);
-}
+#include "gcs_utils.hpp"

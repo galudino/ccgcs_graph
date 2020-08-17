@@ -56,3 +56,14 @@ Don't forget the <code>.tar.gz</code> extension.
 
 Example:<br>
 <code>./maketarball gcs_graph.tar.gz</code>
+
+<h2> Current state </h2>
+- point.hpp has a template <size_t N, typename F = double> class gcs::point
+- vec.hpp has a template <size_t N, typename F = double> class gcs::vec
+- point.hpp, vec.hpp may be used outside of this project (gcs_utils.hpp required)
+- All member functions need to be documented
+
+Still TODO:
+- node.hpp, edge.hpp, graph.hpp, possibly another abstraction for paths
+- Exhaustive unit tests
+- Test on macOS, Windows 10, and Linux (Ubuntu)
