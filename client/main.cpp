@@ -115,9 +115,7 @@ int main(int argc, const char *argv[]) {
     // This is okay. (A type was actually assigned, but it is a 'dummy' type)
     gcs::node<2> dummy;
     std::cout << dummy << std::endl;
-    
-    std::cout << std::endl;
-    
+        
     // No node value type, no edge value type.
     // Just a plain graph with node position data (2D) and edge weights.
     gcs::graph<2> plain_graph;
