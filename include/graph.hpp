@@ -106,7 +106,7 @@ private:
     
     node_list m_nodes;              ///< All instances of node are stored here.
     all_edge_list m_alledgelist;    ///< All instances of edge_list are stored here
-    
+       
     // each node has an edge_list - represents all connections for that node.
     // All of the edge_lists are stored in m_alledgelist.
 };
@@ -122,18 +122,7 @@ private:
     remove an edge
     get a path traversal given start and end nodes
     get an edgelist (container of "complete" edges)
- 
-    a "headless" edge contains only the child node, edge value, and weight.
-    a "complete" edge has parent and child node, edge value, and weight.
-    
-    The unordered_map will have buckets of
-        nodes : [container of headless edges]
- 
-    A "complete" edge is a
-        std::pair<node, headless edge>.
- 
-    gcs::edge is a "headless" edge.
- 
+  
     iterators:
         -iterate over all nodes in graph
         -iterate from a starting node, to an ending node, via shortest path

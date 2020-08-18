@@ -105,15 +105,9 @@ int main(int argc, const char *argv[]) {
     
     // Here, we decide not to supply an edge_val type.
     // This is okay. (A type was actually assigned, but it is a 'dummy' type)
-    gcs::edge<2> e0(&parent, &child);
+    gcs::edge<2> e0(child.id(), parent.distance(child));
     std::cout << e0 << std::endl;
-    
-    // Edges do not own node instances, they merely have their addresses.
-    // The m_child field of an edge points to a node that already exists
-    e0.set_child(&other);
-    e0.set(&parent, parent.distance(parent));
-    std::cout << e0 << std::endl;
-    
+        
     // Here, we decide not to supply a node_val type.
     // This is okay. (A type was actually assigned, but it is a 'dummy' type)
     gcs::node<2> dummy;

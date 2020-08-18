@@ -64,50 +64,40 @@ public:
     using point = gcs::point<N, F>;
     
     edge()
-    : m_child(nullptr), m_val(), m_weight(), m_id(edge_id_counter++) {
+    : m_val(), m_weight(), m_child_id(-1),  m_id(edge_id_counter++) {
         
     }
     
-    edge(point *parent, point *child)
-    : m_child(child), m_val(), m_weight(parent->distance(*m_child)), m_id(edge_id_counter++) {
-        // in the future, for weight values other than distance --
-        // have some logic usingthe parent and child to determine weight
-        // in a different fashion.
+    edge(int child_id) : m_val(), m_weight(), m_child_id(child_id), m_id(edge_id_counter++) {
+
     }
     
-    edge(point *parent, point *child, const F weight)
-    : m_child(child), m_weight(weight), m_id(edge_id_counter++) {
+    edge(int child_id, F weight) : m_val(), m_weight(weight), m_child_id(child_id), m_id(edge_id_counter++) {
         
     }
 
-    edge(point *parent, point *child, const edge_val &val)
-    : m_child(child), m_val(val), m_weight(parent->distance(*m_child)), m_id(edge_id_counter++) {
-        
-    }
-    
-    edge(point *parent, point *child, const F weight, const edge_val &val)
-    : m_child(child), m_val(val), m_weight(weight), m_id(edge_id_counter++) {
+    edge(int child_id, F weight, const edge_val &val) : m_val(val), m_weight(weight), m_child_id(child_id), m_id(edge_id_counter++) {
         
     }
     
     ~edge() {
         
     }
-    
-    size_t id() const {
-        return m_id;
-    }
-    
+
     edge_val val() const {
         return m_val;
     }
-    
+
     F weight() const {
         return m_weight;
     }
-        
-    point *child() const {
-        return m_child;
+    
+    int child_id() const {
+        return m_child_id;
+    }
+
+    int id() const {
+        return m_id;
     }
     
     void set_val(const edge_val &val) {
@@ -117,23 +107,23 @@ public:
     void set_val(const edge_val &&val) {
         m_val = val;
     }
-        
-    void set_child(point *child) {
-        m_child = child;
-    }
-    
+
     void set_weight(const F weight) {
         m_weight = weight;
     }
-
-    void set(point *child, const F weight) {
-        m_child = child;
+    
+    void set_child_id(int child_id) {
+        m_child_id = child_id;
+    }
+    
+    void set(int child_id, const F weight) {
+        m_child_id = child_id;
         m_weight = weight;
     }
     
-    void set(const edge_val &val, point *child, const F weight) {
+    void set(const edge_val &val, int child_id, const F weight) {
         m_val = val;
-        m_child = child;
+        m_child_id = child_id;
         m_weight = weight;
     }
 
@@ -149,14 +139,14 @@ public:
     
     edge& operator=(const edge &e) {
         m_val = e.val;
-        m_child = e.child;
+        m_child_id = e.child_id;
         m_weight = e.weight;
         return *this;
     }
     
     edge& operator=(const edge &&e) {
         m_val = e.m_val;
-        m_child = e.m_child;
+        m_child_id = e.m_child_id;
         m_weight = e.m_weight;
         
         return *this;
@@ -164,22 +154,18 @@ public:
     
     friend std::ostream &operator<<(std::ostream &os, const edge &e) {
         os << "Edge ID " << e.m_id << " -> weight (" << e.m_weight
-        << ") with value (" << e.m_val << ") and child node " << *e.m_child;
+        << ") with value (" << e.m_val << ") and child node " << e.m_child_id;
         return os;
     }
     
     static inline size_t edge_id_counter = 0;
     
 private:
-    point *m_child;     ///< Address of a node, stored as address of base class point.
-                        ///< Stored as (point *) so this template won't have to depend on
-                        ///< the node_val template parameter for gcs::node.
-    
     edge_val m_val;     ///< Value type field for an edge
-    
     F m_weight;         ///< Weight of edge, based on distance between parent and child
-    size_t m_id;        ///< Edge identifier. Assigned upon instantiation and should not be changed.
+    
+    int m_child_id;     ///< Child node ID
+    int m_id;           ///< Edge identifier. Assigned upon instantiation and should not be changed.
 };
-
 
 #endif /* EDGE_HPP */

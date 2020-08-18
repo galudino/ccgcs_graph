@@ -87,7 +87,7 @@ public:
 
     }
     
-    size_t id() const {
+    int id() const {
         return m_id;
     }
         
@@ -168,11 +168,11 @@ public:
         return os;
     }
     
-    static inline size_t node_id_counter = 0;
+    static inline int node_id_counter = 0;
     
 private:
     node_val m_val;     ///< Value type field for a node
-    size_t m_id;        ///< Node identifier. Assigned upon instantiation and should not be changed.
+    int m_id;           ///< Node identifier. Assigned upon instantiation and should not be changed.
 };
 
 #endif /* NODE_HPP */
