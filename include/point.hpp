@@ -176,7 +176,7 @@ public:
         \param[in]  coords
     */
     void set(const std::initializer_list<F> &coords) {
-        std::copy(coords.begin(), coords.begin() + N, begin());
+        *(this) = coords;
     }
 
     /*!
@@ -185,7 +185,7 @@ public:
         \param[in]  p
     */
     void set(const point &p) {
-        std::copy(p.cbegin(), p.cend(), begin());
+        *(this) = p;
     }
 
     /*!
@@ -194,7 +194,7 @@ public:
         \param[in]  p
     */
     void set(const point &&p) {
-        std::copy(p.begin(), p.end(), begin());
+        *(this) = p;
     }
 
     /*!
@@ -212,7 +212,7 @@ public:
         \return
     */
     point &operator=(const std::initializer_list<F> &coords) {
-        set(coords);
+        std::copy(coords.begin(), coords.begin() + N, begin());
         return *this;
     }
 
@@ -224,7 +224,7 @@ public:
         \return
     */
     point &operator=(const point &p) {
-        set(p);
+        std::copy(p.cbegin(), p.cend(), begin());
         return *this;
     }
 
@@ -236,7 +236,7 @@ public:
         \return
     */
     point &operator=(const point &&p) {
-        set(p);
+        std::copy(p.cbegin(), p.cend(), begin());
         return *this;
     }
 

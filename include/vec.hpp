@@ -192,7 +192,7 @@ public:
         \param[in]  components
     */
     void set(const std::initializer_list<F> &components) {
-        std::copy(components.begin(), components.begin() + N, begin());
+        *(this) = components;
     }
 
     /*!
@@ -201,7 +201,7 @@ public:
         \param[in]  v
     */
     void set(const vec &v) {
-        std::copy(v.begin(), v.end(), begin());
+        *(this) = v;
     }
 
     /*!
@@ -211,8 +211,7 @@ public:
         \param[in]  dst_pt
     */
     void set(const point<N, F> &src_pt, const point<N, F> &dst_pt) {
-        vec v{src_pt, dst_pt};
-        set(v);
+        *(this) = vec{src_pt, dst_pt};
     }
 
     /*!
@@ -222,8 +221,7 @@ public:
         \param[in]  dst_pt
     */
     void set(const point<N, F> &&src_pt, const point<N, F> &&dst_pt) {
-        vec v{src_pt, dst_pt};
-        set(v);
+        *(this) = vec{src_pt, dst_pt};
     }
 
     /*!
@@ -234,8 +232,7 @@ public:
     */
     void set(const std::initializer_list<F> &src_pt,
              const std::initializer_list<F> &dst_pt) {
-        vec v{src_pt, dst_pt};
-        set(v);
+        *(this) = vec{src_pt, dst_pt};
     }
 
     /*!
@@ -246,7 +243,7 @@ public:
         \return
     */
     vec &operator=(const std::initializer_list<F> &components) {
-        set(components);
+        std::copy(components.begin(), components.begin() + N, begin());
         return *this;
     }
 
@@ -258,7 +255,7 @@ public:
         \return
     */
     vec &operator=(const vec &v) {
-        set(v);
+        std::copy(v.cbegin(), v.cend(), begin());
         return *this;
     }
 
@@ -270,7 +267,7 @@ public:
         \return
     */
     vec &operator=(const vec &&v) {
-        set(v);
+        std::copy(v.cbegin(), v.cend(), begin());
         return *this;
     }
 

@@ -74,6 +74,9 @@ int main(int argc, const char *argv[]) {
     auto p_end = vec<2>::endpoint(p_origin, v);
     std::cout << "endpoint from " << p_origin << " with direction " << v << ": "
               << p_end << std::endl;
+    
+    vec<2> m;
+    m.set({3, 4}, {2, 1});
 
     // determining start position
     // from terminal position {4, 7},
@@ -98,7 +101,7 @@ int main(int argc, const char *argv[]) {
     gcs::node<2, std::string> child({3, 4}, "Sarah F");
     
     gcs::node<2, std::string> other({5, 12}, "Laura C");
-    
+    other = point<2>{ 55, 44 };
     std::cout << parent << std::endl;
     std::cout << child << std::endl;
     std::cout << other << std::endl;

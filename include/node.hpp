@@ -130,13 +130,13 @@ public:
     
     node &operator=(const node &n) {
         this->set(n.m_coords);
-        set_val(n.m_val);
+        m_val = n.m_val;
         return *this;
     }
     
     node &operator=(const node &&n) {
         this->set(n.m_coords);
-        set_val(n.m_val);
+        m_val = n.m_val;
         return *this;
     }
     
