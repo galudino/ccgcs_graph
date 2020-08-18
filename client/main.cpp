@@ -36,6 +36,8 @@
 #include "point.hpp"
 #include "vec.hpp"
 
+#include "graph.hpp"
+
 /*!
     \brief  Program execution begins and ends here
 
@@ -84,6 +86,48 @@ int main(int argc, const char *argv[]) {
     // these points are initializer lists --
     // but gcs::point instances can be used too.
     vec<2>({0, 0}, {6, 8}).print_details(std::cout);
+    std::cout << std::endl;
+    
+    // node is a subclass of point.
+    // if the caller does not want/need vertices to store
+    // node_val (additional data) -- and only need position data,
+    // the point class will work.
+    // since all nodes are points, we must upcast our node instances
+    // to point.
+    gcs::node<2, std::string> parent({0, 0}, "Gem A");
+    gcs::node<2, std::string> child({3, 4}, "Sarah F");
+    
+    gcs::node<2, std::string> other({5, 12}, "Laura C");
+    
+    std::cout << parent << std::endl;
+    std::cout << child << std::endl;
+    std::cout << other << std::endl;
+    
+    // Here, we decide not to supply an edge_val type.
+    // This is okay. (A type was actually assigned, but it is a 'dummy' type)
+    gcs::edge<2> e0(&parent, &child);
+    std::cout << e0 << std::endl;
+    
+    // Edges do not own node instances, they merely have their addresses.
+    // The m_child field of an edge points to a node that already exists
+    e0.set_child(&other);
+    e0.set(&parent, parent.distance(parent));
+    std::cout << e0 << std::endl;
+    
+    // Here, we decide not to supply a node_val type.
+    // This is okay. (A type was actually assigned, but it is a 'dummy' type)
+    gcs::node<2> dummy;
+    std::cout << dummy << std::endl;
+    
+    std::cout << std::endl;
+    
+    // No node value type, no edge value type.
+    // Just a plain graph with node position data (2D) and edge weights.
+    gcs::graph<2> plain_graph;
+    
+    // Nodes store a std::string and a 2D point
+    // edges store a std::string and a weight (double)
+    gcs::graph<2, std::string, std::string> value_graph;
 
     return EXIT_SUCCESS;
 }

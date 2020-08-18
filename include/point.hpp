@@ -35,6 +35,8 @@
 #include <array>
 #include <ostream>
 
+#include "gcs_utils.hpp"
+
 namespace gcs {
 template <size_t N, typename F = double>
 class point;
@@ -183,7 +185,7 @@ public:
         \param[in]  p
     */
     void set(const point &p) {
-        std::copy(p.begin(), p.end(), begin());
+        std::copy(p.cbegin(), p.cend(), begin());
     }
 
     /*!
@@ -309,7 +311,10 @@ public:
         \return
     */
     F distance(const point &p) const {
-        return euclidean_distance<N, F>(cbegin(), p.cbegin());
+        auto p0 = const_cast<F *>(cbegin());
+        auto p1 = const_cast<F *>(p.cbegin());
+        auto res = euclidean_distance<N, F>(p0, p1);
+        return res;
     }
 
     /*!
@@ -320,7 +325,9 @@ public:
         \return
     */
     F distance(const point &&p) const {
-        return euclidean_distance<N, F>(cbegin(), p.cbegin());
+        auto p0 = const_cast<F *>(cbegin());
+        auto p1 = const_cast<F *>(p.cbegin());
+        auto res = euclidean_distance<N, F>(p0, p1);
     }
 
     /*!
@@ -362,7 +369,7 @@ public:
         return os;
     }
 
-private:
+protected:
     std::array<F, N> m_coords; ///< Point coordinates stored here.
 };
 

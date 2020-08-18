@@ -40,6 +40,14 @@
 #define BEGIN_GCS_NAMESPACE namespace gcs {
 #define END_GCS_NAMESPACE } // namespace gcs
 
+// For use with SELECTOR structs, if users do not supply a type
+// parameter for templated classes/structs that store value types
+// (i.e. node, edge)
+#define OSTREAM_SELECTOR_BLANK(selector_name)\
+friend std::ostream &operator<<(std::ostream &os, const selector_name &n) {\
+os << "__none__"; return os;\
+}\
+
 namespace gcs {
 constexpr const double epsilon = 0.00000001f;
 
