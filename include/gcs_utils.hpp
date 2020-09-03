@@ -43,10 +43,12 @@
 // For use with SELECTOR structs, if users do not supply a type
 // parameter for templated classes/structs that store value types
 // (i.e. node, edge)
-#define OSTREAM_SELECTOR_BLANK(selector_name)\
-friend std::ostream &operator<<(std::ostream &os, const selector_name &n) {\
-os << "__none__"; return os;\
-}\
+#define OSTREAM_SELECTOR_BLANK(selector_name)                                  \
+    friend std::ostream &operator<<(std::ostream &os,                          \
+                                    const selector_name &n) {                  \
+        os << "__none__";                                                      \
+        return os;                                                             \
+    }
 
 namespace gcs {
 constexpr const double epsilon = 0.00000001f;
@@ -70,8 +72,8 @@ F dot_product(F U[], F V[]);
 /*!
     \brief      Retrieves the distance between two points, u and v
 
-    @tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-    @tparam F   Floating-point precision, default is double.
+    \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+    \tparam F   Floating-point precision, default is double.
 
     \param[in]  u    array of first point's cooridnates (start point), size is
    dimension
@@ -95,8 +97,8 @@ F gcs::euclidean_distance(F u[], F v[]) {
 /*!
     \brief
 
-    @tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-    @tparam F   Floating-point precision, default is double.
+    \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+    \tparam F   Floating-point precision, default is double.
 
     \param[in]  U   array of first vector's components, size is dimension
     \param[in]  V   array of second vector's components, size is dimension
@@ -117,7 +119,7 @@ F gcs::dot_product(F U[], F V[]) {
 /*!
     \brief
 
-    @tparam F   Floating-point precision, default is double.
+    \tparam F   Floating-point precision, default is double.
 
     \param[in]  a
     \param[in]  b
@@ -132,7 +134,7 @@ bool gcs::approx_eq(F a, F b) {
 /*!
     \brief
 
-    @tparam F   Floating-point precision, default is double.
+    \tparam F   Floating-point precision, default is double.
 
     \param[in]  radians
 
@@ -146,7 +148,7 @@ F gcs::deg(F radians) {
 /*!
     \brief
 
-    @tparam F   Floating-point precision, default is double.
+    \tparam F   Floating-point precision, default is double.
 
     \param[in]  degrees
 

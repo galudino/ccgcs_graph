@@ -124,5 +124,22 @@ int main(int argc, const char *argv[]) {
     // edges store a std::string and a weight (double)
     gcs::graph<2, std::string, std::string> value_graph;
 
+    gcs::vec<3> v3_0({0, 0, 0}, {3, 4, 5});
+    gcs::vec<3> v3_1{9, 5, 1};
+    
+    m.set(99, 44);
+    
+    m.print_details(std::cout);
+    v3_0.print_details(std::cout);
+    v3_1.print_details(std::cout);
+    
+    std::cout << std::endl;
+    
+    auto a = vec<3>{2, 3, 4};
+    auto b = vec<3>{5, 6, 7};
+    
+    std::cout << "cross product of a and b = "
+    << a.cross_product(b) << std::endl;
+
     return EXIT_SUCCESS;
 }
