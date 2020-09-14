@@ -72,9 +72,27 @@ public:
 
     /*!
         \brief
-    */
+     */
     vec() {
         reset();
+    }
+    
+    /*!
+        \brief
+     
+        \param[in]  arr
+     */
+    vec(const array &arr) : m_components(arr) {
+        
+    }
+    
+    /*!
+        \brief
+     
+        \param[in]  arr
+     */
+    vec(array &&arr) : m_components(arr) {
+        
     }
 
     /*!
@@ -89,6 +107,15 @@ public:
     /*!
         \brief
 
+        \param[in]  components
+    */
+    vec(initializer_list &&components) {
+        std::copy(components.begin(), components.begin() + N, begin());
+    }
+    
+    /*!
+        \brief
+
         \param[in]  v
     */
     vec(const vec &v) : m_components(v.m_components) {
@@ -99,7 +126,7 @@ public:
 
         \param[in]  v
     */
-    vec(const vec &&v) : m_components(v.m_components) {
+    vec(vec &&v) : m_components(v.m_components) {
     }
 
     /*!
@@ -135,7 +162,7 @@ public:
         \param[in]  src
         \param[in]  dst
     */
-    vec(const point &&src, const point &&dst) {
+    vec(point &&src, point &&dst) {
         auto src_it = src.cbegin();
         auto src_end = src.cend();
         auto dst_it = dst.cbegin();
@@ -160,6 +187,30 @@ public:
         \param[in]  dst
     */
     vec(const initializer_list &src_pt, const initializer_list &dst_pt) {
+        auto src_it = src_pt.begin();
+        auto src_end = src_pt.end();
+        auto dst_it = dst_pt.begin();
+
+        array result;
+        auto it = result.begin();
+
+        while (src_it < src_end) {
+            *(it++) = *(dst_it++) - *(src_it++);
+        }
+
+        m_components = result;
+    }
+    
+    /*!
+        \brief
+
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+        \tparam F   Floating-point precision, default is double.
+
+        \param[in]  src
+        \param[in]  dst
+    */
+    vec(initializer_list &&src_pt, initializer_list &&dst_pt) {
         auto src_it = src_pt.begin();
         auto src_end = src_pt.end();
         auto dst_it = dst_pt.begin();
@@ -260,6 +311,24 @@ public:
     array get() const {
         return m_components;
     }
+    
+    /*!
+        \brief
+
+        \param[in]  arr
+    */
+    void set(const array &arr) {
+        *(this) = arr;
+    }
+    
+    /*!
+        \brief
+
+        \param[in]  arr
+    */
+    void set(array &&arr) {
+        *(this) = arr;
+    }
 
     /*!
         \brief
@@ -269,6 +338,15 @@ public:
     void set(const initializer_list &components) {
         *(this) = components;
     }
+    
+    /*!
+        \brief
+
+        \param[in]  components
+    */
+    void set(initializer_list &&components) {
+        *(this) = components;
+    }
 
     /*!
         \brief
@@ -276,6 +354,15 @@ public:
         \param[in]  v
     */
     void set(const vec &v) {
+        *(this) = v;
+    }
+    
+    /*!
+        \brief
+
+        \param[in]  v
+    */
+    void set(vec &&v) {
         *(this) = v;
     }
 
@@ -295,7 +382,7 @@ public:
         \param[in]  src_pt
         \param[in]  dst_pt
     */
-    void set(const point &&src_pt, const point &&dst_pt) {
+    void set(point &&src_pt, point &&dst_pt) {
         *(this) = vec{src_pt, dst_pt};
     }
 
@@ -308,6 +395,16 @@ public:
     void set(const initializer_list &src_pt, const initializer_list &dst_pt) {
         *(this) = vec{src_pt, dst_pt};
     }
+    
+    /*!
+        \brief
+
+        \param[in]  src_pt
+        \param[in]  dst_pt
+    */
+    void set(initializer_list &&src_pt, initializer_list &&dst_pt) {
+        *(this) = vec{src_pt, dst_pt};
+    }
 
     /*!
         \brief
@@ -317,6 +414,18 @@ public:
         \return
     */
     vec &operator=(const initializer_list &components) {
+        std::copy(components.begin(), components.begin() + N, begin());
+        return *this;
+    }
+    
+    /*!
+        \brief
+
+        \param[in]  components
+
+        \return
+    */
+    vec &operator=(initializer_list &&components) {
         std::copy(components.begin(), components.begin() + N, begin());
         return *this;
     }
@@ -340,7 +449,7 @@ public:
 
         \return
     */
-    vec &operator=(const vec &&v) {
+    vec &operator=(vec &&v) {
         std::copy(v.cbegin(), v.cend(), begin());
         return *this;
     }
@@ -439,31 +548,6 @@ public:
 
         \return
     */
-    vec operator+(const vec &&v) const {
-        auto it = cbegin();
-        auto end = cend();
-        auto v_it = v.cbegin();
-
-        vec result = *this;
-        auto it_result = result.begin();
-
-        while (it < end) {
-            *(it_result++) = *(it++) + *(v_it++);
-        }
-
-        return result;
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  v
-
-        \return
-    */
     vec operator-(const vec &v) const {
         auto it = cbegin();
         auto end = cend();
@@ -489,50 +573,7 @@ public:
 
         \return
     */
-    vec operator-(const vec &&v) const {
-        auto it = cbegin();
-        auto end = cend();
-        auto v_it = v.cbegin();
-
-        vec result = *this;
-        auto it_result = result.begin();
-
-        while (it < end) {
-            *(it_result++) = *(it++) - *(v_it++);
-        }
-
-        return result;
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  v
-
-        \return
-    */
     F operator*(const vec &v) const {
-        auto v0 = cbegin();
-        auto v1 = v.cbegin();
-        auto U = const_cast<F *>(v0);
-        auto V = const_cast<F *>(v1);
-        return gcs::dot_product<N>(U, V);
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  v
-
-        \return
-    */
-    F operator*(const vec &&v) const {
         auto v0 = cbegin();
         auto v1 = v.cbegin();
         auto U = const_cast<F *>(v0);
@@ -638,46 +679,12 @@ public:
         \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
         \tparam F   Floating-point precision, default is double.
 
-        \param[in]  v
-
-        \return
-    */
-    F angle(const vec &&v) const {
-        F dot_product = *(this) * v;
-
-        F product_magnitude = magnitude() * v.magnitude();
-        F reciprocal_product_magnitude = 1 / product_magnitude;
-
-        return std::acos(dot_product * reciprocal_product_magnitude);
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
         \param[in]  src_pt
         \param[in]  dst_pt
 
         \return
     */
     F angle(const point &src_pt, const point &dst_pt) {
-        return angle(vec{src_pt, dst_pt});
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  src_pt
-        \param[in]  dst_pt
-
-        \return
-    */
-    F angle(const point &&src_pt, const point &&dst_pt) {
         return angle(vec{src_pt, dst_pt});
     }
 
@@ -731,20 +738,6 @@ public:
         \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
         \tparam F   Floating-point precision, default is double.
 
-        \param[in]  v
-
-        \return
-    */
-    F dot_product(const vec &&v) const {
-        return *(this) * v;
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
         \param[in]  src_pt
         \param[in]  dst_pt
 
@@ -766,24 +759,8 @@ public:
 
         \return
     */
-    F dot_product(const point &&src_pt, const point &&dst_pt) const {
-        vec v{src_pt, dst_pt};
-        return *(this) * v;
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  src_pt
-        \param[in]  dst_pt
-
-        \return
-    */
     F dot_product(const initializer_list &src_pt,
-                  const initializer_list &&dst_pt) const {
+                  const initializer_list &dst_pt) const {
         vec v{src_pt, dst_pt};
         return *(this) * v;
     }
@@ -830,28 +807,6 @@ public:
         \return
     */
     static point endpoint(const point &src_pt, const vec &dir) {
-        auto result = src_pt;
-        auto dir_it = dir.cbegin();
-
-        std::for_each(result.begin(), result.end(), [&dir_it](F &res) {
-            res += *(dir_it++);
-        });
-
-        return result;
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  src_pt
-        \param[in]  dir
-
-        \return
-    */
-    static point endpoint(const point &&src_pt, const vec &&dir) {
         auto result = src_pt;
         auto dir_it = dir.cbegin();
 
@@ -921,28 +876,6 @@ public:
         \return
     */
     static point srcpoint(const point &dst_pt, const vec &dir) {
-        auto result = dst_pt;
-        auto dir_it = const_cast<F *>(dir.cbegin());
-
-        std::for_each(result.begin(), result.end(), [&](F &res) {
-            res -= *(dir_it++);
-        });
-
-        return result;
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  dst_pt
-        \param[in]  dir
-
-        \return
-    */
-    static point srcpoint(const point &&dst_pt, const vec &&dir) {
         auto result = dst_pt;
         auto dir_it = const_cast<F *>(dir.cbegin());
 
@@ -1053,6 +986,24 @@ public:
 
     /*!
         \brief
+     
+        \param[in]  arr
+     */
+    vec(const array &arr) : m_components(arr) {
+        
+    }
+    
+    /*!
+        \brief
+     
+        \param[in]  arr
+     */
+    vec(array &&arr) : m_components(arr) {
+        
+    }
+    
+    /*!
+        \brief
 
         \param[in]  components
     */
@@ -1060,6 +1011,15 @@ public:
         std::copy(components.begin(), components.begin() + N, begin());
     }
 
+    /*!
+        \brief
+
+        \param[in]  components
+    */
+    vec(initializer_list &&components) {
+        std::copy(components.begin(), components.begin() + N, begin());
+    }
+    
     /*!
         \brief
 
@@ -1073,7 +1033,7 @@ public:
 
         \param[in]  v
     */
-    vec(const vec &&v) : m_components(v.m_components) {
+    vec(vec &&v) : m_components(v.m_components) {
     }
 
     /*!
@@ -1109,7 +1069,7 @@ public:
         \param[in]  src
         \param[in]  dst
     */
-    vec(const point &&src, const point &&dst) {
+    vec(point &&src, point &&dst) {
         auto src_it = src.cbegin();
         auto src_end = src.cend();
         auto dst_it = dst.cbegin();
@@ -1134,6 +1094,30 @@ public:
         \param[in]  dst
     */
     vec(const initializer_list &src_pt, const initializer_list &dst_pt) {
+        auto src_it = src_pt.begin();
+        auto src_end = src_pt.end();
+        auto dst_it = dst_pt.begin();
+
+        array result;
+        auto it = result.begin();
+
+        while (src_it < src_end) {
+            *(it++) = *(dst_it++) - *(src_it++);
+        }
+
+        m_components = result;
+    }
+    
+    /*!
+        \brief
+
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+        \tparam F   Floating-point precision, default is double.
+
+        \param[in]  src
+        \param[in]  dst
+    */
+    vec(initializer_list &&src_pt, initializer_list &&dst_pt) {
         auto src_it = src_pt.begin();
         auto src_end = src_pt.end();
         auto dst_it = dst_pt.begin();
@@ -1243,35 +1227,7 @@ public:
     F y() const {
         return m_components[1];
     }
-
-    /*!
-        \brief
-
-        \param[in]  x
-     */
-    void set_x(const F &x) {
-        m_components[0] = x;
-    }
-
-    /*!
-        \brief
-
-        \param[in]  y
-     */
-    void set_y(const F &y) {
-        m_components[1] = y;
-    }
     
-    /*!
-        \brief
-     
-        \param[in]  x
-        \param[in]  y
-     */
-    void set(const F &x, const F &y) {
-        m_components = { x, y };
-    }
-
     /*!
         \brief
 
@@ -1284,9 +1240,65 @@ public:
     /*!
         \brief
 
+        \param[in]  x
+     */
+    void set_x(const F x) {
+        m_components[0] = x;
+    }
+
+    /*!
+        \brief
+
+        \param[in]  y
+     */
+    void set_y(const F y) {
+        m_components[1] = y;
+    }
+    
+    /*!
+        \brief
+     
+        \param[in]  x
+        \param[in]  y
+        \param[in]  z
+     */
+    void set(const F x, const F y) {
+        m_components = std::array<F, N>{x, y};
+    }
+
+   /*!
+        \brief
+
+        \param[in]  arr
+    */
+    void set(const array &arr) {
+        *(this) = arr;
+    }
+    
+    /*!
+        \brief
+
+        \param[in]  arr
+    */
+    void set(array &&arr) {
+        *(this) = arr;
+    }
+
+    /*!
+        \brief
+
         \param[in]  components
     */
     void set(const initializer_list &components) {
+        *(this) = components;
+    }
+    
+    /*!
+        \brief
+
+        \param[in]  components
+    */
+    void set(initializer_list &&components) {
         *(this) = components;
     }
 
@@ -1298,7 +1310,16 @@ public:
     void set(const vec &v) {
         *(this) = v;
     }
+    
+    /*!
+        \brief
 
+        \param[in]  v
+    */
+    void set(vec &&v) {
+        *(this) = v;
+    }
+    
     /*!
         \brief
 
@@ -1315,7 +1336,7 @@ public:
         \param[in]  src_pt
         \param[in]  dst_pt
     */
-    void set(const point &&src_pt, const point &&dst_pt) {
+    void set(point &&src_pt, point &&dst_pt) {
         *(this) = vec{src_pt, dst_pt};
     }
 
@@ -1328,6 +1349,16 @@ public:
     void set(const initializer_list &src_pt, const initializer_list &dst_pt) {
         *(this) = vec{src_pt, dst_pt};
     }
+    
+    /*!
+        \brief
+
+        \param[in]  src_pt
+        \param[in]  dst_pt
+    */
+    void set(initializer_list &&src_pt, initializer_list &&dst_pt) {
+        *(this) = vec{src_pt, dst_pt};
+    }
 
     /*!
         \brief
@@ -1337,6 +1368,18 @@ public:
         \return
     */
     vec &operator=(const initializer_list &components) {
+        std::copy(components.begin(), components.begin() + N, begin());
+        return *this;
+    }
+    
+    /*!
+        \brief
+
+        \param[in]  components
+
+        \return
+    */
+    vec &operator=(initializer_list &&components) {
         std::copy(components.begin(), components.begin() + N, begin());
         return *this;
     }
@@ -1360,7 +1403,7 @@ public:
 
         \return
     */
-    vec &operator=(const vec &&v) {
+    vec &operator=(vec &&v) {
         std::copy(v.cbegin(), v.cend(), begin());
         return *this;
     }
@@ -1425,184 +1468,116 @@ public:
     }
 
     /*!
-        \brief
+          \brief
 
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
+          \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+          \tparam F   Floating-point precision, default is double.
 
-        \param[in]  v
+          \param[in]  v
 
-        \return
-    */
-    vec operator+(const vec &v) const {
-        auto it = cbegin();
-        auto end = cend();
-        auto v_it = v.cbegin();
+          \return
+      */
+      vec operator+(const vec &v) const {
+          auto it = cbegin();
+          auto end = cend();
+          auto v_it = v.cbegin();
 
-        vec result = *this;
-        auto it_result = result.begin();
+          vec result = *this;
+          auto it_result = result.begin();
 
-        while (it < end) {
-            *(it_result++) = *(it++) + *(v_it++);
-        }
+          while (it < end) {
+              *(it_result++) = *(it++) + *(v_it++);
+          }
 
-        return result;
-    }
+          return result;
+      }
 
-    /*!
-        \brief
+      /*!
+          \brief
 
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
+          \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+          \tparam F   Floating-point precision, default is double.
 
-        \param[in]  v
+          \param[in]  v
 
-        \return
-    */
-    vec operator+(const vec &&v) const {
-        auto it = cbegin();
-        auto end = cend();
-        auto v_it = v.cbegin();
+          \return
+      */
+      vec operator-(const vec &v) const {
+          auto it = cbegin();
+          auto end = cend();
+          auto v_it = v.cbegin();
 
-        vec result = *this;
-        auto it_result = result.begin();
+          vec result = *this;
+          auto it_result = result.begin();
 
-        while (it < end) {
-            *(it_result++) = *(it++) + *(v_it++);
-        }
+          while (it < end) {
+              *(it_result++) = *(it++) - *(v_it++);
+          }
 
-        return result;
-    }
+          return result;
+      }
 
-    /*!
-        \brief
+      /*!
+          \brief
 
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
+          \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+          \tparam F   Floating-point precision, default is double.
 
-        \param[in]  v
+          \param[in]  v
 
-        \return
-    */
-    vec operator-(const vec &v) const {
-        auto it = cbegin();
-        auto end = cend();
-        auto v_it = v.cbegin();
+          \return
+      */
+      F operator*(const vec &v) const {
+          auto v0 = cbegin();
+          auto v1 = v.cbegin();
+          auto U = const_cast<F *>(v0);
+          auto V = const_cast<F *>(v1);
+          return gcs::dot_product<N>(U, V);
+      }
 
-        vec result = *this;
-        auto it_result = result.begin();
+      /*!
+          \brief
 
-        while (it < end) {
-            *(it_result++) = *(it++) - *(v_it++);
-        }
+          \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+          \tparam F   Floating-point precision, default is double.
 
-        return result;
-    }
+          \param[in]  v
 
-    /*!
-        \brief
+          \return
+      */
+      vec &operator+=(const vec &v) {
+          auto it = begin();
+          auto end = cend();
+          auto v_it = v.cbegin();
 
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
+          while (it < end) {
+              *(it++) += *(v_it++);
+          }
 
-        \param[in]  v
+          return *this;
+      }
 
-        \return
-    */
-    vec operator-(const vec &&v) const {
-        auto it = cbegin();
-        auto end = cend();
-        auto v_it = v.cbegin();
+      /*!
+          \brief
 
-        vec result = *this;
-        auto it_result = result.begin();
+          \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+          \tparam F   Floating-point precision, default is double.
 
-        while (it < end) {
-            *(it_result++) = *(it++) - *(v_it++);
-        }
+          \param[in]  v
 
-        return result;
-    }
+          \return
+      */
+      vec &operator-=(const vec &v) {
+          auto it = begin();
+          auto end = cend();
+          auto v_it = v.cbegin();
 
-    /*!
-        \brief
+          while (it < end) {
+              *(it++) -= *(v_it++);
+          }
 
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  v
-
-        \return
-    */
-    F operator*(const vec &v) const {
-        auto v0 = cbegin();
-        auto v1 = v.cbegin();
-        auto U = const_cast<F *>(v0);
-        auto V = const_cast<F *>(v1);
-        return gcs::dot_product<N>(U, V);
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  v
-
-        \return
-    */
-    F operator*(const vec &&v) const {
-        auto v0 = cbegin();
-        auto v1 = v.cbegin();
-        auto U = const_cast<F *>(v0);
-        auto V = const_cast<F *>(v1);
-        return gcs::dot_product<N>(U, V);
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  v
-
-        \return
-    */
-    vec &operator+=(const vec &v) {
-        auto it = begin();
-        auto end = cend();
-        auto v_it = v.cbegin();
-
-        while (it < end) {
-            *(it++) += *(v_it++);
-        }
-
-        return *this;
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  v
-
-        \return
-    */
-    vec &operator-=(const vec &v) {
-        auto it = begin();
-        auto end = cend();
-        auto v_it = v.cbegin();
-
-        while (it < end) {
-            *(it++) -= *(v_it++);
-        }
-
-        return *this;
-    }
+          return *this;
+      }
 
     /*!
         \brief
@@ -1658,46 +1633,12 @@ public:
         \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
         \tparam F   Floating-point precision, default is double.
 
-        \param[in]  v
-
-        \return
-    */
-    F angle(const vec &&v) const {
-        F dot_product = *(this) * v;
-
-        F product_magnitude = magnitude() * v.magnitude();
-        F reciprocal_product_magnitude = 1 / product_magnitude;
-
-        return std::acos(dot_product * reciprocal_product_magnitude);
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
         \param[in]  src_pt
         \param[in]  dst_pt
 
         \return
     */
     F angle(const point &src_pt, const point &dst_pt) {
-        return angle(vec{src_pt, dst_pt});
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  src_pt
-        \param[in]  dst_pt
-
-        \return
-    */
-    F angle(const point &&src_pt, const point &&dst_pt) {
         return angle(vec{src_pt, dst_pt});
     }
 
@@ -1751,20 +1692,6 @@ public:
         \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
         \tparam F   Floating-point precision, default is double.
 
-        \param[in]  v
-
-        \return
-    */
-    F dot_product(const vec &&v) const {
-        return *(this) * v;
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
         \param[in]  src_pt
         \param[in]  dst_pt
 
@@ -1774,23 +1701,7 @@ public:
         vec v{src_pt, dst_pt};
         return *(this) * v;
     }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  src_pt
-        \param[in]  dst_pt
-
-        \return
-    */
-    F dot_product(const point &&src_pt, const point &&dst_pt) const {
-        vec v{src_pt, dst_pt};
-        return *(this) * v;
-    }
-
+    
     /*!
         \brief
 
@@ -1803,7 +1714,7 @@ public:
         \return
     */
     F dot_product(const initializer_list &src_pt,
-                  const initializer_list &&dst_pt) const {
+                  const initializer_list &dst_pt) const {
         vec v{src_pt, dst_pt};
         return *(this) * v;
     }
@@ -1850,28 +1761,6 @@ public:
         \return
     */
     static point endpoint(const point &src_pt, const vec &dir) {
-        point result = src_pt;
-        auto dir_it = dir.cbegin();
-
-        std::for_each(result.begin(), result.end(), [&dir_it](F &res) {
-            res += *(dir_it++);
-        });
-
-        return result;
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  src_pt
-        \param[in]  dir
-
-        \return
-    */
-    static point endpoint(const point &&src_pt, const vec &&dir) {
         point result = src_pt;
         auto dir_it = dir.cbegin();
 
@@ -1941,28 +1830,6 @@ public:
         \return
     */
     static point srcpoint(const point &dst_pt, const vec &dir) {
-        point result = dst_pt;
-        auto dir_it = const_cast<F *>(dir.cbegin());
-
-        std::for_each(result.begin(), result.end(), [&](F &res) {
-            res -= *(dir_it++);
-        });
-
-        return result;
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  dst_pt
-        \param[in]  dir
-
-        \return
-    */
-    static point srcpoint(const point &&dst_pt, const vec &&dir) {
         point result = dst_pt;
         auto dir_it = const_cast<F *>(dir.cbegin());
 
@@ -2070,7 +1937,25 @@ public:
     vec() {
         reset();
     }
-
+    
+    /*!
+        \brief
+     
+        \param[in]  arr
+     */
+    vec(const array &arr) : m_components(arr) {
+        
+    }
+    
+    /*!
+        \brief
+     
+        \param[in]  arr
+     */
+    vec(array &&arr) : m_components(arr) {
+        
+    }
+    
     /*!
         \brief
 
@@ -2080,6 +1965,15 @@ public:
         std::copy(components.begin(), components.begin() + N, begin());
     }
 
+    /*!
+        \brief
+
+        \param[in]  components
+    */
+    vec(initializer_list &&components) {
+        std::copy(components.begin(), components.begin() + N, begin());
+    }
+    
     /*!
         \brief
 
@@ -2093,7 +1987,7 @@ public:
 
         \param[in]  v
     */
-    vec(const vec &&v) : m_components(v.m_components) {
+    vec(vec &&v) : m_components(v.m_components) {
     }
 
     /*!
@@ -2129,7 +2023,7 @@ public:
         \param[in]  src
         \param[in]  dst
     */
-    vec(const point &&src, const point &&dst) {
+    vec(point &&src, point &&dst) {
         auto src_it = src.cbegin();
         auto src_end = src.cend();
         auto dst_it = dst.cbegin();
@@ -2167,12 +2061,37 @@ public:
 
         m_components = result;
     }
+    
+    /*!
+        \brief
+
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+        \tparam F   Floating-point precision, default is double.
+
+        \param[in]  src
+        \param[in]  dst
+    */
+    vec(initializer_list &&src_pt, initializer_list &&dst_pt) {
+        auto src_it = src_pt.begin();
+        auto src_end = src_pt.end();
+        auto dst_it = dst_pt.begin();
+
+        array result;
+        auto it = result.begin();
+
+        while (src_it < src_end) {
+            *(it++) = *(dst_it++) - *(src_it++);
+        }
+
+        m_components = result;
+    }
 
     /*!
         \brief
      */
     ~vec() {
     }
+
 
     /*!
         \brief
@@ -2276,9 +2195,18 @@ public:
     /*!
         \brief
 
+        \return
+     */
+    array get() const {
+        return m_components;
+    }
+    
+    /*!
+        \brief
+
         \param[in]  x
      */
-    void set_x(const F &x) {
+    void set_x(const F x) {
         m_components[0] = x;
     }
 
@@ -2287,7 +2215,7 @@ public:
 
         \param[in]  y
      */
-    void set_y(const F &y) {
+    void set_y(const F y) {
         m_components[1] = y;
     }
     
@@ -2296,7 +2224,7 @@ public:
      
         \param[in]  z
      */
-    void set_z(const F &z) {
+    void set_z(const F z) {
         m_components[2] = z;
     }
     
@@ -2307,17 +2235,26 @@ public:
         \param[in]  y
         \param[in]  z
      */
-    void set(const F &x, const F &y, const F &z) {
-        m_components = { x, y, z };
+    void set(const F x, const F y, const F z) {
+        m_components = std::array<F, N>{x, y, z};
     }
-
+    
     /*!
         \brief
 
-        \return
-     */
-    array get() const {
-        return m_components;
+        \param[in]  arr
+    */
+    void set(const array &arr) {
+        *(this) = arr;
+    }
+    
+    /*!
+        \brief
+
+        \param[in]  arr
+    */
+    void set(array &&arr) {
+        *(this) = arr;
     }
 
     /*!
@@ -2326,6 +2263,15 @@ public:
         \param[in]  components
     */
     void set(const initializer_list &components) {
+        *(this) = components;
+    }
+    
+    /*!
+        \brief
+
+        \param[in]  components
+    */
+    void set(initializer_list &&components) {
         *(this) = components;
     }
 
@@ -2337,7 +2283,16 @@ public:
     void set(const vec &v) {
         *(this) = v;
     }
+    
+    /*!
+        \brief
 
+        \param[in]  v
+    */
+    void set(vec &&v) {
+        *(this) = v;
+    }
+    
     /*!
         \brief
 
@@ -2354,7 +2309,7 @@ public:
         \param[in]  src_pt
         \param[in]  dst_pt
     */
-    void set(const point &&src_pt, const point &&dst_pt) {
+    void set(point &&src_pt, point &&dst_pt) {
         *(this) = vec{src_pt, dst_pt};
     }
 
@@ -2367,6 +2322,16 @@ public:
     void set(const initializer_list &src_pt, const initializer_list &dst_pt) {
         *(this) = vec{src_pt, dst_pt};
     }
+    
+    /*!
+        \brief
+
+        \param[in]  src_pt
+        \param[in]  dst_pt
+    */
+    void set(initializer_list &&src_pt, initializer_list &&dst_pt) {
+        *(this) = vec{src_pt, dst_pt};
+    }
 
     /*!
         \brief
@@ -2376,6 +2341,18 @@ public:
         \return
     */
     vec &operator=(const initializer_list &components) {
+        std::copy(components.begin(), components.begin() + N, begin());
+        return *this;
+    }
+    
+    /*!
+        \brief
+
+        \param[in]  components
+
+        \return
+    */
+    vec &operator=(initializer_list &&components) {
         std::copy(components.begin(), components.begin() + N, begin());
         return *this;
     }
@@ -2399,7 +2376,7 @@ public:
 
         \return
     */
-    vec &operator=(const vec &&v) {
+    vec &operator=(vec &&v) {
         std::copy(v.cbegin(), v.cend(), begin());
         return *this;
     }
@@ -2498,31 +2475,6 @@ public:
 
         \return
     */
-    vec operator+(const vec &&v) const {
-        auto it = cbegin();
-        auto end = cend();
-        auto v_it = v.cbegin();
-
-        vec result = *this;
-        auto it_result = result.begin();
-
-        while (it < end) {
-            *(it_result++) = *(it++) + *(v_it++);
-        }
-
-        return result;
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  v
-
-        \return
-    */
     vec operator-(const vec &v) const {
         auto it = cbegin();
         auto end = cend();
@@ -2548,52 +2500,7 @@ public:
 
         \return
     */
-    vec operator-(const vec &&v) const {
-        auto it = cbegin();
-        auto end = cend();
-        auto v_it = v.cbegin();
-
-        vec result = *this;
-        auto it_result = result.begin();
-
-        while (it < end) {
-            *(it_result++) = *(it++) - *(v_it++);
-        }
-
-        return result;
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  v
-
-        \return
-    */
     F operator*(const vec &v) const {
-        auto v0 = cbegin();
-        auto v1 = v.cbegin();
-
-        auto U = const_cast<F *>(v0);
-        auto V = const_cast<F *>(v1);
-
-        return gcs::dot_product<N>(U, V);
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  v
-
-        \return
-    */
-    F operator*(const vec &&v) const {
         auto v0 = cbegin();
         auto v1 = v.cbegin();
 
@@ -2701,46 +2608,12 @@ public:
         \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
         \tparam F   Floating-point precision, default is double.
 
-        \param[in]  v
-
-        \return
-    */
-    F angle(const vec &&v) const {
-        F dot_product = *(this) * v;
-
-        F product_magnitude = magnitude() * v.magnitude();
-        F reciprocal_product_magnitude = 1 / product_magnitude;
-
-        return std::acos(dot_product * reciprocal_product_magnitude);
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
         \param[in]  src_pt
         \param[in]  dst_pt
 
         \return
     */
     F angle(const point &src_pt, const point &dst_pt) {
-        return angle(vec{src_pt, dst_pt});
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  src_pt
-        \param[in]  dst_pt
-
-        \return
-    */
-    F angle(const point &&src_pt, const point &&dst_pt) {
         return angle(vec{src_pt, dst_pt});
     }
 
@@ -2794,20 +2667,6 @@ public:
         \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
         \tparam F   Floating-point precision, default is double.
 
-        \param[in]  v
-
-        \return
-    */
-    F dot_product(const vec &&v) const {
-        return *(this) * v;
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
         \param[in]  src_pt
         \param[in]  dst_pt
 
@@ -2817,23 +2676,7 @@ public:
         vec v{src_pt, dst_pt};
         return *(this) * v;
     }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  src_pt
-        \param[in]  dst_pt
-
-        \return
-    */
-    F dot_product(const point &&src_pt, const point &&dst_pt) const {
-        vec v{src_pt, dst_pt};
-        return *(this) * v;
-    }
-
+    
     /*!
         \brief
 
@@ -2846,7 +2689,7 @@ public:
         \return
     */
     F dot_product(const initializer_list &src_pt,
-                  const initializer_list &&dst_pt) const {
+                  const initializer_list &dst_pt) const {
         vec v{src_pt, dst_pt};
         return *(this) * v;
     }
@@ -2901,57 +2744,12 @@ public:
         \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
         \tparam F   Floating-point precision, default is double.
 
-        \param[in]  v
-
-        \return
-    */
-    vec cross_product(const vec &&v) const {
-        const auto U = m_components;
-        const auto V = v.m_components;
-
-        const F u1_v2 = U[1] * V[2];
-        const F v1_u2 = V[1] * U[2];
-        
-        const F u0_v2 = U[0] * V[2];
-        const F v0_u2 = V[0] * U[2];
-        
-        const F u0_v1 = U[0] * V[1];
-        const F v0_u1 = V[0] * U[1];
-
-        const auto x = (u1_v2 - v1_u2);
-        const auto y = (u0_v2 - v0_u2) * (-1);    // v0u2 - u0v2
-        const auto z = (u0_v1 - v0_u1);
-
-        return vec{x, y, z};
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
         \param[in]  src_pt
         \param[in]  dst_pt
 
         \return
     */
     vec cross_product(const point &src_pt, const point &dst_pt) const {
-        return cross_product(vec{src_pt, dst_pt});
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  src_pt
-        \param[in]  dst_pt
-
-        \return
-    */
-    vec cross_product(const point &&src_pt, const point &&dst_pt) const {
         return cross_product(vec{src_pt, dst_pt});
     }
 
@@ -2968,7 +2766,7 @@ public:
         \return
     */
     vec cross_product(const initializer_list &src_pt,
-                      const initializer_list &&dst_pt) const {
+                      const initializer_list &dst_pt) const {
         return cross_product(vec{src_pt, dst_pt});
     }
 
@@ -3014,28 +2812,6 @@ public:
         \return
     */
     static point endpoint(const point &src_pt, const vec &dir) {
-        point result = src_pt;
-        auto dir_it = dir.cbegin();
-
-        std::for_each(result.begin(), result.end(), [&dir_it](F &res) {
-            res += *(dir_it++);
-        });
-
-        return result;
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  src_pt
-        \param[in]  dir
-
-        \return
-    */
-    static point endpoint(const point &&src_pt, const vec &&dir) {
         point result = src_pt;
         auto dir_it = dir.cbegin();
 
@@ -3105,28 +2881,6 @@ public:
         \return
     */
     static point srcpoint(const point &dst_pt, const vec &dir) {
-        point result = dst_pt;
-        auto dir_it = const_cast<F *>(dir.cbegin());
-
-        std::for_each(result.begin(), result.end(), [&](F &res) {
-            res -= *(dir_it++);
-        });
-
-        return result;
-    }
-
-    /*!
-        \brief
-
-        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
-        \tparam F   Floating-point precision, default is double.
-
-        \param[in]  dst_pt
-        \param[in]  dir
-
-        \return
-    */
-    static point srcpoint(const point &&dst_pt, const vec &&dir) {
         point result = dst_pt;
         auto dir_it = const_cast<F *>(dir.cbegin());
 

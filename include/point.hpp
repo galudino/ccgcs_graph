@@ -72,6 +72,24 @@ public:
     point() {
         reset();
     }
+    
+    /*!
+        \brief
+     
+        \param[in]  arr
+     */
+    point(const array &arr) : m_coords(arr) {
+        
+    }
+    
+    /*!
+        \brief
+     
+        \param[in]  arr
+     */
+    point(array &&arr) : m_coords(arr) {
+        
+    }
 
     /*!
         \brief
@@ -79,6 +97,15 @@ public:
         \param[in]  coords
     */
     point(const initializer_list &coords) {
+        std::copy(coords.begin(), coords.begin() + N, m_coords.begin());
+    }
+    
+    /*!
+        \brief
+     
+        \param[in]  coords
+     */
+    point(initializer_list &&coords) {
         std::copy(coords.begin(), coords.begin() + N, m_coords.begin());
     }
 
@@ -95,7 +122,7 @@ public:
 
         \param[in]  p
     */
-    point(const point &&p) : m_coords(p.m_coords) {
+    point(point &&p) : m_coords(p.m_coords) {
     }
 
     /*!
@@ -170,10 +197,29 @@ public:
 
     /*!
         \brief
+     
         \return
      */
     array get() const {
         return m_coords;
+    }
+    
+    /*!
+        \brief
+        
+        \param[in]  arr
+     */
+    void set(const array &arr) {
+        m_coords = arr;
+    }
+    
+    /*!
+        \brief
+        
+        \param[in]  arr
+     */
+    void set(array &&arr) {
+        m_coords = arr;
     }
 
     /*!
@@ -182,6 +228,15 @@ public:
         \param[in]  coords
     */
     void set(const initializer_list &coords) {
+        *(this) = coords;
+    }
+    
+    /*!
+        \brief
+     
+        \param[in]  coords
+     */
+    void set(initializer_list &&coords) {
         *(this) = coords;
     }
 
@@ -193,13 +248,13 @@ public:
     void set(const point &p) {
         *(this) = p;
     }
-
+    
     /*!
         \brief
-
+            
         \param[in]  p
-    */
-    void set(const point &&p) {
+     */
+    void set(point &&p) {
         *(this) = p;
     }
 
@@ -225,6 +280,18 @@ public:
     /*!
         \brief
 
+        \param[in]  coords
+
+        \return
+    */
+    point &operator=(initializer_list &&coords) {
+        m_coords = coords;
+        return *this;
+    }
+    
+    /*!
+        \brief
+
         \param[in]  p
 
         \return
@@ -241,7 +308,7 @@ public:
 
         \return
     */
-    point &operator=(const point &&p) {
+    point &operator=(point &&p) {
         m_coords = p.m_coords;
         return *this;
     }
@@ -326,19 +393,6 @@ public:
     /*!
         \brief
 
-        \param[in]  p
-
-        \return
-    */
-    F distance(const point &&p) const {
-        auto p0 = const_cast<F *>(cbegin());
-        auto p1 = const_cast<F *>(p.cbegin());
-        auto res = euclidean_distance<N, F>(p0, p1);
-    }
-
-    /*!
-        \brief
-
         \param[in]  os
     */
     void print_details(std::ostream &os) const {
@@ -404,7 +458,35 @@ public:
     point() {
         reset();
     }
+    
+    /*!
+        \brief
+     
+        \param[in]  x
+        \param[in]  y
+     */
+    point(const F x, const F y) : m_coords(std::array<F, N>{x, y}) {
+        
+    }
+    
+    /*!
+        \brief
+     
+        \param[in]  arr
+     */
+    point(const array &arr) : m_coords(arr) {
+        
+    }
 
+    /*!
+        \brief
+     
+        \param[in]  arr
+     */
+    point(array &&arr) : m_coords(arr) {
+        
+    }
+    
     /*!
         \brief
 
@@ -414,6 +496,15 @@ public:
         std::copy(coords.begin(), coords.begin() + N, m_coords.begin());
     }
 
+    /*!
+        \brief
+
+        \param[in]  coords
+    */
+    point(initializer_list &&coords) {
+        std::copy(coords.begin(), coords.begin() + N, m_coords.begin());
+    }
+    
     /*!
         \brief
 
@@ -427,7 +518,7 @@ public:
 
         \param[in]  p
     */
-    point(const point &&p) : m_coords(p.m_coords) {
+    point(point &&p) : m_coords(p.m_coords) {
     }
 
     /*!
@@ -520,6 +611,14 @@ public:
     
     /*!
         \brief
+        \return
+     */
+    array get() const {
+        return m_coords;
+    }
+    
+    /*!
+        \brief
      
         \param[in]  x
      */
@@ -542,25 +641,44 @@ public:
         \param[in]  x
         \param[in]  y
      */
-    void set(const F &x, const F &y) {
+    void set(const F x, const F y) {
         m_coords[0] = x;
         m_coords[1] = y;
     }
-
+    
     /*!
         \brief
-        \return
+     
+        \param[in]  arr
      */
-    array get() const {
-        return m_coords;
+    void set(const array &arr) {
+        m_coords = arr;
     }
-
+    
+    /*!
+        \brief
+     
+        \param[in]  arr
+     */
+    void set(array &&arr) {
+        m_coords = arr;
+    }
+    
     /*!
         \brief
 
         \param[in]  coords
     */
     void set(const initializer_list &coords) {
+        *(this) = coords;
+    }
+    
+    /*!
+        \brief
+     
+        \param[in]  coords
+     */
+    void set(initializer_list &&coords) {
         *(this) = coords;
     }
 
@@ -578,10 +696,10 @@ public:
 
         \param[in]  p
     */
-    void set(const point &&p) {
+    void set(point &&p) {
         *(this) = p;
     }
-
+    
     /*!
         \brief
      */
@@ -604,6 +722,18 @@ public:
     /*!
         \brief
 
+        \param[in]  coords
+
+        \return
+    */
+    point &operator=(initializer_list &&coords) {
+        std::copy(coords.begin(), coords.begin() + N, begin());
+        return *this;
+    }
+    
+    /*!
+        \brief
+
         \param[in]  p
 
         \return
@@ -620,7 +750,7 @@ public:
 
         \return
     */
-    point &operator=(const point &&p) {
+    point &operator=(point &&p) {
         std::copy(p.cbegin(), p.cend(), begin());
         return *this;
     }
@@ -705,19 +835,6 @@ public:
     /*!
         \brief
 
-        \param[in]  p
-
-        \return
-    */
-    F distance(const point &&p) const {
-        auto p0 = const_cast<F *>(cbegin());
-        auto p1 = const_cast<F *>(p.cbegin());
-        auto res = euclidean_distance<N, F>(p0, p1);
-    }
-
-    /*!
-        \brief
-
         \param[in]  os
     */
     void print_details(std::ostream &os) const {
@@ -783,6 +900,35 @@ public:
     point() {
         reset();
     }
+    
+    /*!
+        \brief
+     
+        \param[in]  x
+        \param[in]  y
+        \param[in]  z
+     */
+    point(const F x, const F y, const F z) : m_coords(std::array<F, N>{x, y, z}) {
+        
+    }
+    
+    /*!
+        \brief
+     
+        \param[in]  arr
+     */
+    point(const array &arr) : m_coords(arr) {
+        
+    }
+    
+    /*!
+        \brief
+            
+        \param[in]  arr
+     */
+    point(array &&arr) : m_coords(arr) {
+        
+    }
 
     /*!
         \brief
@@ -796,6 +942,15 @@ public:
     /*!
         \brief
 
+        \param[in]  coords
+    */
+    point(initializer_list &&coords) {
+        std::copy(coords.begin(), coords.begin() + N, m_coords.begin());
+    }
+    
+    /*!
+        \brief
+
         \param[in]  p
     */
     point(const point &p) : m_coords(p.m_coords) {
@@ -806,7 +961,7 @@ public:
 
         \param[in]  p
     */
-    point(const point &&p) : m_coords(p.m_coords) {
+    point(point &&p) : m_coords(p.m_coords) {
     }
 
     /*!
@@ -908,6 +1063,14 @@ public:
     
     /*!
         \brief
+        \return
+     */
+    array get() const {
+        return m_coords;
+    }
+    
+    /*!
+        \brief
      
         \param[in]  x
      */
@@ -938,8 +1101,9 @@ public:
      
         \param[in]  x
         \param[in]  y
+        \param[in]  z
      */
-    void set(const F &x, const F &y, const F &z) {
+    void set(const F x, const F y, const F z) {
         m_coords[0] = x;
         m_coords[1] = y;
         m_coords[2] = z;
@@ -947,12 +1111,22 @@ public:
     
     /*!
         \brief
-        \return
+     
+        \param[in]  arr
      */
-    array get() const {
-        return m_coords;
+    void set(const array &arr) {
+        m_coords = arr;
     }
-
+    
+    /*!
+        \brief
+     
+        \param[in]  arr
+     */
+    void set(array &&arr) {
+        m_coords = arr;
+    }
+    
     /*!
         \brief
 
@@ -962,6 +1136,15 @@ public:
         *(this) = coords;
     }
 
+    /*!
+        \brief
+
+        \param[in]  coords
+    */
+    void set(initializer_list &&coords) {
+        *(this) = coords;
+    }
+    
     /*!
         \brief
 
@@ -976,10 +1159,10 @@ public:
 
         \param[in]  p
     */
-    void set(const point &&p) {
+    void set(point &&p) {
         *(this) = p;
     }
-
+        
     /*!
         \brief
      */
@@ -995,6 +1178,18 @@ public:
         \return
     */
     point &operator=(const initializer_list &coords) {
+        m_coords = coords;
+        return *this;
+    }
+    
+    /*!
+        \brief
+
+        \param[in]  coords
+
+        \return
+    */
+    point &operator=(initializer_list &&coords) {
         m_coords = coords;
         return *this;
     }
@@ -1018,7 +1213,7 @@ public:
 
         \return
     */
-    point &operator=(const point &&p) {
+    point &operator=(point &&p) {
         m_coords = p.m_coords;
         return *this;
     }
@@ -1098,19 +1293,6 @@ public:
         auto p1 = const_cast<F *>(p.cbegin());
         auto res = euclidean_distance<N, F>(p0, p1);
         return res;
-    }
-
-    /*!
-        \brief
-
-        \param[in]  p
-
-        \return
-    */
-    F distance(const point &&p) const {
-        auto p0 = const_cast<F *>(cbegin());
-        auto p1 = const_cast<F *>(p.cbegin());
-        auto res = euclidean_distance<N, F>(p0, p1);
     }
 
     /*!
