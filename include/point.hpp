@@ -58,57 +58,29 @@ class point<3, F>;
 template <size_t N, typename F>
 class gcs::point {
 public:
-    using array = std::array<F, N>;
-    using initializer_list = std::initializer_list<F>;
-    
-    using iterator = typename array::iterator;
-    using const_iterator = typename array::const_iterator;
-    using reverse_iterator = typename array::reverse_iterator;
-    using const_reverse_iterator = typename array::const_reverse_iterator;
-
-    /*!
-        \brief
-     */
-    point() {
-        reset();
-    }
-    
     /*!
         \brief
      
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+
         \param[in]  arr
      */
-    point(const array &arr) : m_coords(arr) {
+    point(const std::array<F, N> &arr) : m_coords(arr) {
         
     }
     
     /*!
         \brief
-     
-        \param[in]  arr
-     */
-    point(array &&arr) : m_coords(arr) {
         
-    }
-
-    /*!
-        \brief
+        \tparam F   Floating-point precision, default is double.
 
         \param[in]  coords
     */
-    point(const initializer_list &coords) {
+    point(std::initializer_list<F> coords) {
         std::copy(coords.begin(), coords.begin() + N, m_coords.begin());
     }
     
-    /*!
-        \brief
-     
-        \param[in]  coords
-     */
-    point(initializer_list &&coords) {
-        std::copy(coords.begin(), coords.begin() + N, m_coords.begin());
-    }
-
     /*!
         \brief
 
@@ -119,127 +91,135 @@ public:
 
     /*!
         \brief
+        
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
 
-        \param[in]  p
-    */
-    point(point &&p) : m_coords(p.m_coords) {
-    }
-
-    /*!
-        \brief
-    */
-    ~point() {
-    }
-
-    /*!
-        \brief
         \return
      */
-    iterator begin() {
+    typename std::array<F, N>::iterator begin() {
         return m_coords.begin();
     }
 
     /*!
         \brief
+        
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+
         \return
      */
-    iterator end() {
+    typename std::array<F, N>::iterator end() {
         return m_coords.end();
     }
 
     /*!
         \brief
+        
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+
         \return
      */
-    const_iterator cbegin() const {
+    typename std::array<F, N>::const_iterator cbegin() const {
         return m_coords.cbegin();
     }
 
     /*!
         \brief
+        
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+
         \return
      */
-    const_iterator cend() const {
+    typename std::array<F, N>::const_iterator cend() const {
         return m_coords.cend();
     }
 
     /*!
         \brief
+        
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+
         \return
      */
-    reverse_iterator rbegin() {
+    typename std::array<F, N>::reverse_iterator rbegin() {
         return m_coords.rbegin();
     }
 
     /*!
         \brief
+        
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+
         \return
      */
-    reverse_iterator rend() {
+    typename std::array<F, N>::reverse_iterator rend() {
         return m_coords.rend();
     }
 
     /*!
         \brief
+        
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+
         \return
      */
-    const_reverse_iterator crbegin() const {
+    typename std::array<F, N>::const_reverse_iterator crbegin() const {
         return m_coords.crbegin();
     }
 
     /*!
         \brief
+        
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+
         \return
      */
-    const_reverse_iterator crend() const {
+    typename std::array<F, N>::const_reverse_iterator crend() const {
         return m_coords.crend();
     }
 
     /*!
         \brief
-     
+        
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+
         \return
      */
-    array get() const {
+    std::array<F, N> get() const {
         return m_coords;
     }
     
     /*!
         \brief
         
-        \param[in]  arr
-     */
-    void set(const array &arr) {
-        m_coords = arr;
-    }
-    
-    /*!
-        \brief
-        
-        \param[in]  arr
-     */
-    void set(array &&arr) {
-        m_coords = arr;
-    }
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
 
-    /*!
-        \brief
-
-        \param[in]  coords
-    */
-    void set(const initializer_list &coords) {
-        *(this) = coords;
+        \return
+     */
+    void set(const std::array<F, N> &arr) {
+        m_coords = arr;
     }
     
     /*!
         \brief
      
+        \tparam F   Floating-point precision, default is double.
+
         \param[in]  coords
-     */
-    void set(initializer_list &&coords) {
+    */
+    void set(std::initializer_list<F> coords) {
         *(this) = coords;
     }
-
+    
     /*!
         \brief
 
@@ -251,15 +231,6 @@ public:
     
     /*!
         \brief
-            
-        \param[in]  p
-     */
-    void set(point &&p) {
-        *(this) = p;
-    }
-
-    /*!
-        \brief
      */
     void reset() {
         m_coords.fill(0);
@@ -267,24 +238,12 @@ public:
 
     /*!
         \brief
+     
+        \tparam F   Floating-point precision, default is double.
 
         \param[in]  coords
-
-        \return
     */
-    point &operator=(const initializer_list &coords) {
-        m_coords = coords;
-        return *this;
-    }
-
-    /*!
-        \brief
-
-        \param[in]  coords
-
-        \return
-    */
-    point &operator=(initializer_list &&coords) {
+    point &operator=(std::initializer_list<F> coords) {
         m_coords = coords;
         return *this;
     }
@@ -300,19 +259,7 @@ public:
         m_coords = p.m_coords;
         return *this;
     }
-
-    /*!
-        \brief
-
-        \param[in]  p
-
-        \return
-    */
-    point &operator=(point &&p) {
-        m_coords = p.m_coords;
-        return *this;
-    }
-
+    
     /*!
         \brief
         \return
@@ -334,45 +281,14 @@ public:
 
     /*!
         \brief
-
-        \param[in]  p
-
-        \return
-    */
-    bool operator==(const point &p) const {
-        return m_coords == p.m_coords;
-    }
-
-    /*!
-        \brief
-
-        \param[in]  p
-
-        \return
-    */
-    bool operator!=(const point &p) {
-        return !(*(this) == p);
-    }
-
-    /*!
-        \brief
-
-        \param[in]  p
-
-        \return
-    */
-    bool operator!=(const point &p) const {
-        return !(*(this) == p);
-    }
-
-    /*!
-        \brief
+     
+        \tparam F   Floating-point precision, default is double.
 
         \param[in]  coords
-
+     
         \return
     */
-    F distance(const initializer_list &coords) const {
+    F distance(std::initializer_list<F> coords) const {
         return euclidean_distance<N, F>(cbegin(), coords.cbegin());
     }
 
@@ -383,9 +299,9 @@ public:
 
         \return
     */
-    F distance(const point &p) const {
-        auto p0 = const_cast<F *>(cbegin());
-        auto p1 = const_cast<F *>(p.cbegin());
+    F distance(const point &p) {
+        auto p0 = cbegin();
+        auto p1 = p.cbegin();
         auto res = euclidean_distance<N, F>(p0, p1);
         return res;
     }
@@ -430,7 +346,7 @@ public:
     }
 
 protected:
-    array m_coords; ///< Point coordinates stored here.
+    std::array<F, N> m_coords; ///< Point coordinates stored here.
 };
 
 /*!
@@ -444,14 +360,6 @@ class gcs::point<2, F> {
 public:
     static constexpr auto N = 2;
     
-    using array = std::array<F, N>;
-    using initializer_list = std::initializer_list<F>;
-    
-    using iterator = typename array::iterator;
-    using const_iterator = typename array::const_iterator;
-    using reverse_iterator = typename array::reverse_iterator;
-    using const_reverse_iterator = typename array::const_reverse_iterator;
-
     /*!
         \brief
      */
@@ -462,6 +370,9 @@ public:
     /*!
         \brief
      
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+
         \param[in]  x
         \param[in]  y
      */
@@ -472,36 +383,23 @@ public:
     /*!
         \brief
      
-        \param[in]  arr
-     */
-    point(const array &arr) : m_coords(arr) {
-        
-    }
-
-    /*!
-        \brief
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
      
         \param[in]  arr
      */
-    point(array &&arr) : m_coords(arr) {
+    point(const std::array<F, N> &arr) : m_coords(arr) {
         
     }
     
     /*!
         \brief
-
+        
+        \tparam F   Floating-point precision, default is double.
+        
         \param[in]  coords
     */
-    point(const initializer_list &coords) {
-        std::copy(coords.begin(), coords.begin() + N, m_coords.begin());
-    }
-
-    /*!
-        \brief
-
-        \param[in]  coords
-    */
-    point(initializer_list &&coords) {
+    point(std::initializer_list<F> &coords) {
         std::copy(coords.begin(), coords.begin() + N, m_coords.begin());
     }
     
@@ -515,79 +413,97 @@ public:
 
     /*!
         \brief
-
-        \param[in]  p
-    */
-    point(point &&p) : m_coords(p.m_coords) {
-    }
-
-    /*!
-        \brief
-    */
-    ~point() {
-    }
-
-    /*!
-        \brief
+     
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space
+     
         \return
      */
-    iterator begin() {
+    typename std::array<F, N>::iterator begin() {
         return m_coords.begin();
     }
 
     /*!
         \brief
+     
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space
+     
         \return
      */
-    iterator end() {
+    typename std::array<F, N>::iterator end() {
         return m_coords.end();
     }
 
     /*!
         \brief
+     
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space
+     
         \return
      */
-    const_iterator cbegin() const {
+    typename std::array<F, N>::const_iterator cbegin() const {
         return m_coords.cbegin();
     }
 
     /*!
         \brief
+     
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space
+     
         \return
      */
-    const_iterator cend() const {
+    typename std::array<F, N>::const_iterator cend() const {
         return m_coords.cend();
     }
 
     /*!
         \brief
+     
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space
+     
         \return
      */
-    reverse_iterator rbegin() {
+    typename std::array<F, N>::reverse_iterator rbegin() {
         return m_coords.rbegin();
     }
 
     /*!
         \brief
+     
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space
+     
         \return
      */
-    reverse_iterator rend() {
+    typename std::array<F, N>::reverse_iterator rend() {
         return m_coords.rend();
     }
 
     /*!
         \brief
+     
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space
+     
         \return
      */
-    const_reverse_iterator crbegin() const {
+    typename std::array<F, N>::const_reverse_iterator crbegin() const {
         return m_coords.crbegin();
     }
 
     /*!
         \brief
+     
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space
+     
         \return
      */
-    const_reverse_iterator crend() const {
+    typename std::array<F, N>::const_reverse_iterator crend() const {
         return m_coords.crend();
     }
     
@@ -611,9 +527,13 @@ public:
     
     /*!
         \brief
+     
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space
+     
         \return
      */
-    array get() const {
+    std::array<F, N> get() const {
         return m_coords;
     }
     
@@ -649,36 +569,23 @@ public:
     /*!
         \brief
      
-        \param[in]  arr
-     */
-    void set(const array &arr) {
-        m_coords = arr;
-    }
-    
-    /*!
-        \brief
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space
      
         \param[in]  arr
      */
-    void set(array &&arr) {
+    void set(const std::array<F, N> &arr) {
         m_coords = arr;
     }
     
     /*!
         \brief
-
+        
+        \tparam F   Floating-point precision, default is double.
+        
         \param[in]  coords
     */
-    void set(const initializer_list &coords) {
-        *(this) = coords;
-    }
-    
-    /*!
-        \brief
-     
-        \param[in]  coords
-     */
-    void set(initializer_list &&coords) {
+    void set(std::initializer_list<F> coords) {
         *(this) = coords;
     }
 
@@ -688,15 +595,6 @@ public:
         \param[in]  p
     */
     void set(const point &p) {
-        *(this) = p;
-    }
-
-    /*!
-        \brief
-
-        \param[in]  p
-    */
-    void set(point &&p) {
         *(this) = p;
     }
     
@@ -709,24 +607,14 @@ public:
 
     /*!
         \brief
-
+        
+        \tparam F   Floating-point precision, default is double.
+        
         \param[in]  coords
 
         \return
     */
-    point &operator=(const initializer_list &coords) {
-        std::copy(coords.begin(), coords.begin() + N, begin());
-        return *this;
-    }
-
-    /*!
-        \brief
-
-        \param[in]  coords
-
-        \return
-    */
-    point &operator=(initializer_list &&coords) {
+    point &operator=(std::initializer_list<F> coords) {
         std::copy(coords.begin(), coords.begin() + N, begin());
         return *this;
     }
@@ -739,18 +627,6 @@ public:
         \return
     */
     point &operator=(const point &p) {
-        std::copy(p.cbegin(), p.cend(), begin());
-        return *this;
-    }
-
-    /*!
-        \brief
-
-        \param[in]  p
-
-        \return
-    */
-    point &operator=(point &&p) {
         std::copy(p.cbegin(), p.cend(), begin());
         return *this;
     }
@@ -773,48 +649,17 @@ public:
     bool operator==(const point &p) {
         return m_coords == p.m_coords;
     }
-
+    
     /*!
         \brief
-
-        \param[in]  p
-
-        \return
-    */
-    bool operator==(const point &p) const {
-        return m_coords == p.m_coords;
-    }
-
-    /*!
-        \brief
-
-        \param[in]  p
-
-        \return
-    */
-    bool operator!=(const point &p) {
-        return !(*(this) == p);
-    }
-
-    /*!
-        \brief
-
-        \param[in]  p
-
-        \return
-    */
-    bool operator!=(const point &p) const {
-        return !(*(this) == p);
-    }
-
-    /*!
-        \brief
-
+     
+        \tparam F   Floating-point precision, default is double.
+        
         \param[in]  coords
 
         \return
     */
-    F distance(const initializer_list &coords) const {
+    F distance(std::initializer_list<F> coords) const {
         return euclidean_distance<N, F>(cbegin(), coords.cbegin());
     }
 
@@ -825,12 +670,12 @@ public:
 
         \return
     */
-    F distance(const point &p) const {
-        auto p0 = const_cast<F *>(cbegin());
-        auto p1 = const_cast<F *>(p.cbegin());
+    F distance(const point &p) {
+        auto p0 = cbegin();
+        auto p1 = p.cbegin();
         auto res = euclidean_distance<N, F>(p0, p1);
         return res;
-    }
+    };
 
     /*!
         \brief
@@ -872,7 +717,7 @@ public:
     }
 
 protected:
-    array m_coords; ///< Point coordinates stored here.
+    std::array<F, N> m_coords; ///< Point coordinates stored here.
 };
 
 /*!
@@ -885,14 +730,6 @@ template <typename F>
 class gcs::point<3, F> {
 public:
     static constexpr auto N = 3;
-    
-    using array = std::array<F, N>;
-    using initializer_list = std::initializer_list<F>;
-    
-    using iterator = typename array::iterator;
-    using const_iterator = typename array::const_iterator;
-    using reverse_iterator = typename array::reverse_iterator;
-    using const_reverse_iterator = typename array::const_reverse_iterator;
 
     /*!
         \brief
@@ -915,39 +752,27 @@ public:
     /*!
         \brief
      
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+     
         \param[in]  arr
      */
-    point(const array &arr) : m_coords(arr) {
+    point(const std::array<F, N> &arr) : m_coords(arr) {
         
     }
     
-    /*!
-        \brief
-            
-        \param[in]  arr
-     */
-    point(array &&arr) : m_coords(arr) {
-        
-    }
 
     /*!
         \brief
+     
+        \tparam F   Floating-point precision, default is double.
 
         \param[in]  coords
     */
-    point(const initializer_list &coords) {
+    point(std::initializer_list<F> coords) {
         std::copy(coords.begin(), coords.begin() + N, m_coords.begin());
     }
 
-    /*!
-        \brief
-
-        \param[in]  coords
-    */
-    point(initializer_list &&coords) {
-        std::copy(coords.begin(), coords.begin() + N, m_coords.begin());
-    }
-    
     /*!
         \brief
 
@@ -958,79 +783,97 @@ public:
 
     /*!
         \brief
-
-        \param[in]  p
-    */
-    point(point &&p) : m_coords(p.m_coords) {
-    }
-
-    /*!
-        \brief
-    */
-    ~point() {
-    }
-
-    /*!
-        \brief
+    
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+     
         \return
      */
-    iterator begin() {
+    typename std::array<F, N>::iterator begin() {
         return m_coords.begin();
     }
 
     /*!
         \brief
+     
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+     
         \return
      */
-    iterator end() {
+    typename std::array<F, N>::iterator end() {
         return m_coords.end();
     }
 
     /*!
         \brief
+     
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+     
         \return
      */
-    const_iterator cbegin() const {
+    typename std::array<F, N>::const_iterator cbegin() const {
         return m_coords.cbegin();
     }
 
     /*!
         \brief
+     
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+     
         \return
      */
-    const_iterator cend() const {
+    typename std::array<F, N>::const_iterator cend() const {
         return m_coords.cend();
     }
 
     /*!
         \brief
+     
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+     
         \return
      */
-    reverse_iterator rbegin() {
+    typename std::array<F, N>::reverse_iterator rbegin() {
         return m_coords.rbegin();
     }
 
     /*!
         \brief
+     
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+     
         \return
      */
-    reverse_iterator rend() {
+    typename std::array<F, N>::reverse_iterator rend() {
         return m_coords.rend();
     }
 
     /*!
         \brief
+     
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+     
         \return
      */
-    const_reverse_iterator crbegin() const {
+    typename std::array<F, N>::const_reverse_iterator crbegin() const {
         return m_coords.crbegin();
     }
 
     /*!
         \brief
+     
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+     
         \return
      */
-    const_reverse_iterator crend() const {
+    typename std::array<F, N>::const_reverse_iterator crend() const {
         return m_coords.crend();
     }
 
@@ -1063,9 +906,13 @@ public:
     
     /*!
         \brief
+     
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+     
         \return
      */
-    array get() const {
+    std::array<F, N> get() const {
         return m_coords;
     }
     
@@ -1111,47 +958,25 @@ public:
     
     /*!
         \brief
-     
+
+        \tparam F   Floating-point precision, default is double.
+        \tparam N   Represents dimension, i.e. N = 2 is R^2 - 2D space.
+      
         \param[in]  arr
      */
-    void set(const array &arr) {
+    void set(const std::array<F, N> &arr) {
         m_coords = arr;
     }
     
     /*!
         \brief
-     
-        \param[in]  arr
-     */
-    void set(array &&arr) {
-        m_coords = arr;
-    }
-    
-    /*!
-        \brief
-
+        
+        \tparam F   Floating-point precision, default is double.
+        
         \param[in]  coords
     */
-    void set(const initializer_list &coords) {
+    void set(std::initializer_list<F> coords) {
         *(this) = coords;
-    }
-
-    /*!
-        \brief
-
-        \param[in]  coords
-    */
-    void set(initializer_list &&coords) {
-        *(this) = coords;
-    }
-    
-    /*!
-        \brief
-
-        \param[in]  p
-    */
-    void set(const point &p) {
-        *(this) = p;
     }
 
     /*!
@@ -1159,7 +984,7 @@ public:
 
         \param[in]  p
     */
-    void set(point &&p) {
+    void set(const point &p) {
         *(this) = p;
     }
         
@@ -1172,24 +997,14 @@ public:
 
     /*!
         \brief
-
+        
+        \tparam F   Floating-point precision, default is double.
+        
         \param[in]  coords
 
         \return
     */
-    point &operator=(const initializer_list &coords) {
-        m_coords = coords;
-        return *this;
-    }
-    
-    /*!
-        \brief
-
-        \param[in]  coords
-
-        \return
-    */
-    point &operator=(initializer_list &&coords) {
+    point &operator=(std::initializer_list<F> coords) {
         m_coords = coords;
         return *this;
     }
@@ -1202,18 +1017,6 @@ public:
         \return
     */
     point &operator=(const point &p) {
-        m_coords = p.m_coords;
-        return *this;
-    }
-
-    /*!
-        \brief
-
-        \param[in]  p
-
-        \return
-    */
-    point &operator=(point &&p) {
         m_coords = p.m_coords;
         return *this;
     }
@@ -1239,45 +1042,14 @@ public:
 
     /*!
         \brief
-
-        \param[in]  p
-
-        \return
-    */
-    bool operator==(const point &p) const {
-        return m_coords == p.m_coords;
-    }
-
-    /*!
-        \brief
-
-        \param[in]  p
-
-        \return
-    */
-    bool operator!=(const point &p) {
-        return !(*(this) == p);
-    }
-
-    /*!
-        \brief
-
-        \param[in]  p
-
-        \return
-    */
-    bool operator!=(const point &p) const {
-        return !(*(this) == p);
-    }
-
-    /*!
-        \brief
-
+        
+        \tparam F   Floating-point precision, default is double.
+        
         \param[in]  coords
 
         \return
     */
-    F distance(const initializer_list &coords) const {
+    F distance(std::initializer_list<F> coords) const {
         return euclidean_distance<N, F>(cbegin(), coords.cbegin());
     }
 
@@ -1288,9 +1060,9 @@ public:
 
         \return
     */
-    F distance(const point &p) const {
-        auto p0 = const_cast<F *>(cbegin());
-        auto p1 = const_cast<F *>(p.cbegin());
+    F distance(const point &p) {
+        auto p0 = cbegin();
+        auto p1 = p.cbegin();
         auto res = euclidean_distance<N, F>(p0, p1);
         return res;
     }
@@ -1335,7 +1107,7 @@ public:
     }
 
 protected:
-    array m_coords; ///< Point coordinates stored here.
+    std::array<F, N> m_coords; ///< Point coordinates stored here.
 };
 
 #endif /* POINT_HPP */
