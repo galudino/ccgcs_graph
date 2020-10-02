@@ -63,10 +63,10 @@ template <typename F = double>
 F rad(F degrees);
 
 template <size_t N, typename F = double>
-F euclidean_distance(F u[], F v[]);
+F euclidean_distance(const F u[], const F v[]);
 
 template <size_t N, typename F = double>
-F dot_product(F U[], F V[]);
+F dot_product(const F U[], const F V[]);
 } // namespace gcs
 
 /*!
@@ -83,7 +83,7 @@ F dot_product(F U[], F V[]);
     \return     Euclidean distance between two points, u and v
  */
 template <size_t N, typename F>
-F gcs::euclidean_distance(F u[], F v[]) {
+F gcs::euclidean_distance(const F u[], const F v[]) {
     F sum = 0;
 
     for (size_t i = 0; i < N; i++) {
@@ -106,7 +106,7 @@ F gcs::euclidean_distance(F u[], F v[]) {
     \return     dot product of vectors U and V
  */
 template <size_t N, typename F>
-F gcs::dot_product(F U[], F V[]) {
+F gcs::dot_product(const F U[], const F V[]) {
     F sum = 0;
 
     for (size_t i = 0; i < N; i++) {
